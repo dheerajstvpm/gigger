@@ -1,0 +1,38 @@
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+// javascript
+// const sgMail = require('@sendgrid/mail')
+// sgMail.setApiKey(process.env.sendgridKey)
+// const msg = {
+//   to: 'dheerajstvpm@gmail.com', // Change to your recipient
+//   from: 'gigger@yopmail.com', // Change to your verified sender
+//   subject: 'Sending with SendGrid is Fun',
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// }
+// sgMail
+//   .send(msg)
+//   .then(() => {
+//     console.log('Email sent')
+//   })
+//   .catch((error) => {
+//     console.error(error)
+//   })
+
+client
+  .verify
+  .services(process.env.serviceSID)
+  .verifications
+  .create({
+    to: `${req.body.email}`,
+    channel: 'email'
+  })
+  .then((data) => {
+    console.log(data)
+    name1 = req.body.name,
+      mobileNumber1 = req.body.mobileNumber,
+      username1 = req.body.username.toLowerCase(),
+      password1 = hashPassword,
+      // address1 = req.body.address
+      res.redirect('/otpSignupVerify')
+  })
