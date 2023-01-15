@@ -19,6 +19,8 @@
 //     console.error(error)
 //   })
 
+const client = require('twilio')(process.env.accountSID, process.env.authToken);
+
 client
   .verify
   .services(process.env.serviceSID)
