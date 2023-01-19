@@ -1,5 +1,5 @@
 const express = require("express")
-const cors=require ("cors")
+const cors = require('cors')
 const logger = require("morgan")
 const dotenv = require("dotenv");
 dotenv.config()
@@ -9,7 +9,7 @@ const path = require('path');
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', true);
 
-const app=express()
+const app = express()
 
 const api = require('./routes/api');
 

@@ -1,18 +1,27 @@
-mat-toolbar {
+#userHeader {
     display: flex;
     background-color: #1f1f1f;
     justify-content: space-between;
+}
+
+#userHeader a {
+    text-decoration: none;
+    color: #cfcfcf;
 }
 
 #logo {
     font-size:xx-large;
 }
 
-div {
+.logoDiv {
     display: flex;
 }
 
-ul {
+.loginDiv {
+    display: flex;
+}
+
+.loginDiv ul {
     display: flex;
 }
 
@@ -21,7 +30,37 @@ ul li {
     margin-right: 15px;
 }
 
-a {
+#adminTab {
+    padding-left: 0%;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100vh;
+    background-color: #cfcfcf;
+    color: #1f1f1f;
+    justify-content: space-between;
+}
+
+#adminTab a {
     text-decoration: none;
-    color: #cfcfcf;
+    color: #1f1f1f;
+}
+
+.dashboardDiv{
+    margin-top: 50px;
+}
+
+.dashboardDiv ul{
+    padding-left: 0%;
+}
+
+.dashboardDiv li{
+    padding-left: 0%;
+    margin-top: 20px;
+    font-size: large;
+}
+
+.dashboardDiv a:hover{
+    padding-left: 0%;
+    font-size: larger;
 }

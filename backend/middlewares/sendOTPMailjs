@@ -32,9 +32,9 @@ client
   .then((data) => {
     console.log(data)
     name1 = req.body.name,
-      mobileNumber1 = req.body.mobileNumber,
-      username1 = req.body.username.toLowerCase(),
-      password1 = hashPassword,
-      // address1 = req.body.address
-      res.redirect('/otpSignupVerify')
+    mobileNumber1 = req.body.mobileNumber,
+    username1 = req.body.username.toLowerCase(),
+    password1 = hashPassword,
+    // address1 = req.body.address
+    res.redirect('/otpSignupVerify')
   })

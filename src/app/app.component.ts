@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(public auth: AuthService, private _router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
   title = 'gigger';
+
+  hasRoute(route: string) {
+    return this.router.url === route;
+  }
 
 }

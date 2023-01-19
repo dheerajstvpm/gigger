@@ -13,13 +13,23 @@ import { MaterialModule } from './modules/material/material.module';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from "./services/token-interceptor.service";
+import { DashboardComponent } from './adminComponents/dashboard/dashboard.component';
+import { ArtistDetailsComponent } from './adminComponents/artist-details/artist-details.component';
+import { UserDetailsComponent } from './adminComponents/user-details/user-details.component';
+import { BookingDetailsComponent } from './adminComponents/booking-details/booking-details.component';
+import { RequestDetailsComponent } from './adminComponents/request-details/request-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    DashboardComponent,
+    ArtistDetailsComponent,
+    UserDetailsComponent,
+    BookingDetailsComponent,
+    RequestDetailsComponent
   ],
   imports: [
     BrowserModule,

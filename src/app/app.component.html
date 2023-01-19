@@ -1,12 +1,12 @@
-<mat-toolbar>
-  <div>
+<mat-toolbar *ngIf="hasRoute('/login')" id="userHeader">
+  <div class="logoDiv">
     <ul>
       <li>
-        <a id="logo"> Gigger </a>
+        <a routerLink="/" id="logo"> Gigger </a>
       </li>
     </ul>
   </div>
-  <div>
+  <div class="loginDiv">
     <ul *ngIf="!auth.loggedIn()">
       <li>
         <a routerLink="/login" routerLinkActive="active">Login</a>
@@ -25,5 +25,30 @@
     </ul>
   </div>
 </mat-toolbar>
+<!-- <mat-toolbar *ngIf="hasRoute('/\/admin.*/g')"> -->
 
-<router-outlet></router-outlet>
+<mat-toolbar *ngIf="hasRoute('/admin/dashboard')" id="adminTab">
+  <div class="dashboardDiv">
+    <ul>
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active">Admin dashboard</a>
+      </li>
+      <li>
+        <a routerLink="/admin/artistDetails" routerLinkActive="active">Artist details</a>
+      </li>
+      <li>
+        <a routerLink="/admin/userDetails" routerLinkActive="active">User details</a>
+      </li>
+      <li>
+        <a routerLink="/admin/bookingDetails" routerLinkActive="active">Booking details</a>
+      </li>
+      <li>
+        <a routerLink="/admin/requestDetails" routerLinkActive="active">Request details</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
+
+<router-outlet>
+  
+</router-outlet>
