@@ -13,6 +13,13 @@ export class AuthService {
 
   constructor(private http:HttpClient, private router:Router) { }
 
+  userRoute() {
+      return /^(\/user).*/g.test(this.router.url);
+  }
+  adminRoute() {
+      return /^(\/admin).*/g.test(this.router.url);
+  }
+
   signupUser(user:User){
     return this.http.post<{token:string}>(this.signupUrl,user)
   }
@@ -28,6 +35,6 @@ export class AuthService {
   }
   logout() {
     localStorage.removeItem('token')
-    this.router.navigate(['/login'])
+    this.router.navigate(['/user/login'])
   }
 }

@@ -26,7 +26,7 @@ export class LoginComponent {
           next: res => {
             console.log(res);
             localStorage.setItem("token",res.token)
-            this.router.navigate(["/profile"])
+            this.router.navigate(["/user/profile"])
           },
           error: err => {
             console.log(err);

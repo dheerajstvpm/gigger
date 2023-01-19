@@ -14,7 +14,7 @@ router.post('/login', userController.userLoginPost);
 
 router.get('/bookings',userController.bookingsGet);
 
-router.post('/requests', userController.requestsGet);
+router.get('/requests', userController.requestsGet);
 
 router.get('/profile', middlewares.verifyToken, userController.profileGet);
 

@@ -13,19 +13,19 @@ import { DashboardComponent } from './adminComponents/dashboard/dashboard.compon
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "/profile",
+    redirectTo: "/user/profile",
     pathMatch: "full"
   },
   {
-    path: "signup",
+    path: "user/signup",
     component: SignupComponent
   },
   {
-    path: "login",
+    path: "user/login",
     component: LoginComponent
   },
   {
-    path: "profile",
+    path: "user/profile",
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },

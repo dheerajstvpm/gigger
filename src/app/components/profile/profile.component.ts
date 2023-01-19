@@ -24,7 +24,7 @@ export class ProfileComponent {
         error: (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401||500) {
-              this.router.navigate(['/login'])
+              this.router.navigate(['/user/login'])
             }
           }
         }

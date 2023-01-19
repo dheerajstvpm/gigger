@@ -1,23 +1,26 @@
-<mat-toolbar *ngIf="hasRoute('/login')" id="userHeader">
+<title *ngIf="auth.userRoute()">Gigger</title>
+<title *ngIf="auth.adminRoute()">Gigger admin</title>
+
+<mat-toolbar *ngIf="auth.userRoute()" id="userHeader">
   <div class="logoDiv">
     <ul>
       <li>
-        <a routerLink="/" id="logo"> Gigger </a>
+        <a routerLink="/user" id="logo"> Gigger </a>
       </li>
     </ul>
   </div>
   <div class="loginDiv">
     <ul *ngIf="!auth.loggedIn()">
       <li>
-        <a routerLink="/login" routerLinkActive="active">Login</a>
+        <a routerLink="/user/login" routerLinkActive="active">Login</a>
       </li>
       <li>
-        <a routerLink="/signup" routerLinkActive="active">Signup</a>
+        <a routerLink="/user/signup" routerLinkActive="active">Signup</a>
       </li>
     </ul>
     <ul *ngIf="auth.loggedIn()">
       <li>
-        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+        <a routerLink="/user/profile" routerLinkActive="active">Profile</a>
       </li>
       <li>
         <a (click)="auth.logout()" routerLinkActive="active">Logout</a>
@@ -25,9 +28,8 @@
     </ul>
   </div>
 </mat-toolbar>
-<!-- <mat-toolbar *ngIf="hasRoute('/\/admin.*/g')"> -->
 
-<mat-toolbar *ngIf="hasRoute('/admin/dashboard')" id="adminTab">
+<mat-toolbar *ngIf="auth.adminRoute()" id="adminTab">
   <div class="dashboardDiv">
     <ul>
       <li>
@@ -49,6 +51,5 @@
   </div>
 </mat-toolbar>
 
-<router-outlet>
-  
-</router-outlet>
+<router-outlet></router-outlet>
+
