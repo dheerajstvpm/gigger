@@ -13,7 +13,6 @@ export class SignupComponent {
   signupUserData:User = {
     name: "",
     username: "",
-    mobile: undefined,
     password: ""
   }
 
