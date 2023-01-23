@@ -12,7 +12,7 @@ import { DashboardComponent } from './adminComponents/dashboard/dashboard.compon
 
 const routes: Routes = [
   {
-    path: "",
+    path: "user",
     redirectTo: "/user/profile",
     pathMatch: "full"
   },

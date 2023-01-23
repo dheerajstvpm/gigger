@@ -30,6 +30,15 @@ ul li {
     margin-right: 15px;
 }
 
+#signUpButton{
+    border-radius: 12px;
+    margin-top: 10px;
+    color: #2f2f2f;
+    background-color: #cfcfcf;
+    width: 100px;
+    height: 40px;
+}
+
 #adminTab {
     padding-left: 0%;
     display: flex;

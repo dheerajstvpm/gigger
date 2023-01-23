@@ -2,54 +2,54 @@
 <title *ngIf="auth.adminRoute()">Gigger admin</title>
 
 <mat-toolbar *ngIf="auth.userRoute()" id="userHeader">
-  <div class="logoDiv">
-    <ul>
-      <li>
-        <a routerLink="/user" id="logo"> Gigger </a>
-      </li>
-    </ul>
-  </div>
-  <div class="loginDiv">
-    <ul *ngIf="!auth.loggedIn()">
-      <li>
-        <a routerLink="/user/login" routerLinkActive="active">Login</a>
-      </li>
-      <li>
-        <a routerLink="/user/signup" routerLinkActive="active">Signup</a>
-      </li>
-    </ul>
-    <ul *ngIf="auth.loggedIn()">
-      <li>
-        <a routerLink="/user/profile" routerLinkActive="active">Profile</a>
-      </li>
-      <li>
-        <a (click)="auth.logout()" routerLinkActive="active">Logout</a>
-      </li>
-    </ul>
-  </div>
+    <div class="logoDiv">
+        <ul>
+            <li>
+                <a routerLink="/user" id="logo"> Gigger </a>
+            </li>
+        </ul>
+    </div>
+    <div class="loginDiv">
+        <ul *ngIf="!auth.loggedIn()">
+            <li>
+                
+                <button mat-raised-button class="firstButton"><a routerLink="/user/login" routerLinkActive="active">Login</a></button>
+            </li>
+            <li>
+                <button mat-raised-button class="secondButton"><a routerLink="/user/signup" routerLinkActive="active">Signup</a></button>
+            </li>
+        </ul>
+        <ul *ngIf="auth.loggedIn()">
+            <li>
+                <a routerLink="/user/profile" routerLinkActive="active">Profile</a>
+            </li>
+            <li>
+                <a (click)="auth.logout()" routerLinkActive="active">Logout</a>
+            </li>
+        </ul>
+    </div>
 </mat-toolbar>
 
 <mat-toolbar *ngIf="auth.adminRoute()" id="adminTab">
-  <div class="dashboardDiv">
-    <ul>
-      <li>
-        <a routerLink="/admin/dashboard" routerLinkActive="active">Admin dashboard</a>
-      </li>
-      <li>
-        <a routerLink="/admin/artistDetails" routerLinkActive="active">Artist details</a>
-      </li>
-      <li>
-        <a routerLink="/admin/userDetails" routerLinkActive="active">User details</a>
-      </li>
-      <li>
-        <a routerLink="/admin/bookingDetails" routerLinkActive="active">Booking details</a>
-      </li>
-      <li>
-        <a routerLink="/admin/requestDetails" routerLinkActive="active">Request details</a>
-      </li>
-    </ul>
-  </div>
+    <div class="dashboardDiv">
+        <ul>
+            <li>
+                <a routerLink="/admin/dashboard" routerLinkActive="active">Admin dashboard</a>
+            </li>
+            <li>
+                <a routerLink="/admin/artistDetails" routerLinkActive="active">Artist details</a>
+            </li>
+            <li>
+                <a routerLink="/admin/userDetails" routerLinkActive="active">User details</a>
+            </li>
+            <li>
+                <a routerLink="/admin/bookingDetails" routerLinkActive="active">Booking details</a>
+            </li>
+            <li>
+                <a routerLink="/admin/requestDetails" routerLinkActive="active">Request details</a>
+            </li>
+        </ul>
+    </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-

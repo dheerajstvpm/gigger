@@ -1,1 +1,3 @@
-<p>profile works!</p>
+<br>
+<p *ngIf="!artistFlag">Profile of User {{profile.name}}</p>
+<p *ngIf="artistFlag">Profile of Artist {{profile.name}}</p>

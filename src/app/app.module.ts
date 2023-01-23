@@ -18,6 +18,7 @@ import { ArtistDetailsComponent } from './adminComponents/artist-details/artist-
 import { UserDetailsComponent } from './adminComponents/user-details/user-details.component';
 import { BookingDetailsComponent } from './adminComponents/booking-details/booking-details.component';
 import { RequestDetailsComponent } from './adminComponents/request-details/request-details.component';
+import { VerifyOTPComponent } from './components/verify-otp/verify-otp.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RequestDetailsComponent } from './adminComponents/request-details/reque
     ArtistDetailsComponent,
     UserDetailsComponent,
     BookingDetailsComponent,
-    RequestDetailsComponent
+    RequestDetailsComponent,
+    VerifyOTPComponent
   ],
   imports: [
     BrowserModule,
