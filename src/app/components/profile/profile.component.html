@@ -1,3 +1,176 @@
 <br>
-<p *ngIf="!artistFlag">Profile of User {{profile.name}}</p>
-<p *ngIf="artistFlag">Profile of Artist {{profile.name}}</p>
+<p *ngIf="!profile.artistFlag">Profile of User {{profile|json}}</p>
+<p *ngIf="profile.artistFlag">Profile of Artist {{profile|json}}</p>
+
+<button *ngIf="editOn" mat-mini-fab (click)="editToggle()" class="roundButton" id="editButton">
+    <mat-icon fontIcon="edit"></mat-icon>
+</button>
+<button *ngIf="!editOn" mat-mini-fab (click)="submitToggle()" class="roundButton" id="submitEdit">
+    <mat-icon fontIcon="check-circle"></mat-icon>
+</button>
+<div class="profileDiv">
+    <div class="topDiv">
+        <div class="imageDiv">
+            <input type="file" class="image-input" (change)="onFileSelected($event,'')" #imageUpload>
+            <div class="file-upload">
+                <!-- {{fileName || "No file uploaded yet."}} -->
+                <div *ngIf="!editOn" class="imgA1" (click)="imageUpload.click()">
+                    <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+                </div>
+                <div *ngIf="editOn" class="imgA2">
+                    <img *ngIf='profile.profileImage' src="http://localhost:3000/images/{{profile.profileImage}}"
+                        alt="profile">
+                    <img *ngIf='!profile.profileImage'
+                        src="http://localhost:3000/images/istockphoto-1248723171-612x612.jpeg" alt="profile">
+                </div>
+            </div>
+        </div>
+        <div class="detailsDiv">
+            <div>Personal details</div>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput value="{{profile.name}}" [disabled]="editOn">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput value="{{profile.username}}" disabled>
+            </mat-form-field>
+        </div>
+        <div class="aboutMeDiv">
+            <div>About Me</div>
+            <mat-form-field class="example-full-width">
+                <textarea matInput value="{{profile.aboutMe}}" [disabled]="editOn"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="addContent">
+        <div>Tracks</div>
+        <div class="tracksListDiv">
+            <div *ngFor="let item of profile.tracks">
+                <button *ngIf="!editOn" (click)="deleteTrack(item)" mat-mini-fab id="deleteButton">
+                    <mat-icon fontIcon="delete"></mat-icon>
+                </button>
+                <img *ngIf="item.albumArt" src="http://localhost:3000/albumArt/{{item.albumArt}}" id="{{item.name}}"
+                    #track (click)="changeTrack(track)">
+                <input type="file" multiple class="albumArt-input" id="item.name"
+                    (change)="onFileSelected($event,item.name)" #albumArtUpload>
+                <img *ngIf="!item.albumArt" src="http://localhost:3000/images/istockphoto-1248723171-612x612.jpeg"
+                    id="{{item.name}}" (click)="albumArtUpload.click()">
+            </div>
+        </div>
+        <input type="file" multiple class="track-input" (change)="onFileSelected($event,'')" #trackUpload>
+        <div *ngIf="!editOn" class="contentDiv">
+            <div class="file-upload">
+                <div class="imgA1" (click)="trackUpload.click()">
+                    <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="addContent">
+        <div>Videos</div>
+        <div class="videosListDiv">
+            <div *ngFor="let item of profile.videos">
+                <button *ngIf="!editOn" (click)="deleteVideo(item)" mat-mini-fab id="deleteButton">
+                    <mat-icon fontIcon="delete"></mat-icon>
+                </button>
+                <div *ngFor="let item of profile.videos">
+                    <button *ngIf="!editOn" mat-mini-fab id="deleteButton">
+                        <mat-icon fontIcon="delete"></mat-icon>
+                    </button>
+                    <img src="http://localhost:3000/images/{{item.name}}" id="{{item.name}}" #track
+                        (click)="changeTrack(track)">
+                </div>
+                <video width="320" height="240" controls>
+                    <source src="http://localhost:3000/videos/{{item.name}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <input type="file" class="video-input" (change)="onFileSelected($event,'')" #videoUpload>
+        <div *ngIf="!editOn" class="contentDiv">
+            <div class="file-upload">
+                <div class="imgA1" (click)="videoUpload.click()">
+                    <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottomDiv">
+        <div class="tabGroup">
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab label="Favourites">
+                    <div class="mat-tab favourites">
+                        <div>Artists</div>
+                        <div class="artistsList">
+                            <div class="imgDiv">
+                                <button *ngIf="!editOn" mat-mini-fab id="deleteButton">
+                                    <mat-icon fontIcon="delete"></mat-icon>
+                                </button>
+                                <img src="https://images.pexels.com/photos/1699161/pexels-photo-1699161.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="artist">
+                            </div>
+                            <div class="imgDiv">
+                                <button *ngIf="!editOn" mat-mini-fab id="deleteButton">
+                                    <mat-icon fontIcon="delete"></mat-icon>
+                                </button>
+                                <img src="https://images.pexels.com/photos/379962/pexels-photo-379962.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    alt="artist">
+                            </div>
+                        </div>
+                        <div>Tracks</div>
+                        <div class="tracksList">
+                            <div class="tracksListDiv">
+                                <button *ngIf="!editOn" mat-mini-fab id="deleteButton">
+                                    <mat-icon fontIcon="delete"></mat-icon>
+                                </button>
+                                <img src="https://images.pexels.com/photos/7422154/pexels-photo-7422154.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    id="Ay Hairathe" #first (click)="changeTrack(first)">
+                            </div>
+                            <div class="tracksListDiv">
+                                <button *ngIf="!editOn" mat-mini-fab id="deleteButton">
+                                    <mat-icon fontIcon="delete"></mat-icon>
+                                </button>
+                                <img src="https://images.pexels.com/photos/1762411/pexels-photo-1762411.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                    id="rockstar04(www.songs.pk)" #second (click)="changeTrack(second)">
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Past events">
+                    <div class="mat-tab pastEvents">
+                    </div>
+                </mat-tab>
+                <mat-tab label="Booking history">
+                    <div class="mat-tab bookingHistory">
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>
+
+
+<!-- <audio src="http://localhost:3000/tracks/Ay Hairathe.mp3" controls autoplay>
+    <p>If you are reading this, it is because your browser does not support the audio element.</p>
+</audio> -->
+
+<!-- <audio src="http://localhost:3000/tracks/{{track}}.mp3" controls autoplay>
+    <p>If you are reading this, it is because your browser does not support the audio element.</p>
+</audio> -->
+
+<audio src="http://localhost:3000/tracks/{{track}}" id="player" autoplay></audio>
+<div class="audioPlayer">
+    <button mat-raised-button onclick="document.getElementById('player').play()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="play_arrow"></mat-icon>
+    </button>
+    <button mat-raised-button onclick="document.getElementById('player').pause()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="pause"></mat-icon>
+    </button>
+    <button mat-raised-button onclick="document.getElementById('player').volume += 0.1">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="volume_up"></mat-icon>
+    </button>
+    <button mat-raised-button onclick="document.getElementById('player').volume -= 0.1">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="volume_down"></mat-icon>
+    </button>
+</div>

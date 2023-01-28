@@ -8,6 +8,7 @@
 
 input {
     width: 40vw;
+    max-width: 350px;
     height: 50px;
     color: #cfcfcf;
     font-size: large;

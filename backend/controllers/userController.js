@@ -12,7 +12,7 @@ const userSignupPost = async (req, res) => {
         bcrypt.hash(req.body.password, 10)
             .then((hash) => {
                 const user = new User({
-                    artistFlag:req.body.artistFlag,
+                    artistFlag: req.body.artistFlag,
                     name: req.body.name,
                     username: req.body.username.toLowerCase(),
                     password: hash,
@@ -38,7 +38,7 @@ const userLoginPost = async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username })
         if (!user) {
-            res.send({loginError:"Invalid username"});
+            res.send({ loginError: "Invalid username" });
         } else {
             bcrypt.compare(req.body.password, user.password)
                 .then(function (bcryptResult) {
@@ -47,7 +47,7 @@ const userLoginPost = async (req, res) => {
                         const token = jwt.sign(payload, process.env.jwtKey)
                         res.send({ token })
                     } else {
-                        res.send({loginError:"Invalid password"})
+                        res.send({ loginError: "Invalid password" })
                     }
                 })
                 .catch((err) => {
@@ -87,10 +87,89 @@ const profileGet = async (req, res) => {
     }
 }
 
+const deleteTrack = async (req, res) => {
+    console.log(req.body);
+    console.log(req.userId);
+    await User.updateOne({ _id: req.userId }, { $pull: { tracks: { _id: req.body._id } } })
+}
+
+const deleteVideo = async (req, res) => {
+    console.log(req.body);
+    console.log(req.userId);
+    await User.updateOne({ _id: req.userId }, { $pull: { videos: { _id: req.body._id } } })
+}
+
+const imageUpload = async (req, res) => {
+    const str = req.files.file0.name;
+    const n = str.lastIndexOf('.');
+    const fileExt = str.substring(n);
+    const uniqueFileId = req.userId + fileExt
+    fileName = './public/images/'
+    try {
+        await User.updateOne({ _id: req.userId }, { $set: { profileImage: uniqueFileId } })
+        req.files.file0.mv(fileName + uniqueFileId);
+        console.log('Image uploaded : ' + str);
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const trackUpload = async (req, res) => {
+    folderName = './public/tracks/'
+    for (file of Object.values(req.files)) {
+        try {
+            fileName = req.userId + '_' + file.name
+            await User.updateOne({ _id: req.userId }, { $push: { tracks: { name: fileName } } })
+            await file.mv(folderName + fileName);
+            console.log('Track uploaded : ' + fileName);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+const albumArtUpload = async (req, res) => {
+    const albumArt = req.files.albumArt.name;
+    console.log(albumArt);
+    const str = req.files.file0.name;
+    const n = str.lastIndexOf('.');
+    const fileExt = str.substring(n);
+    const trackName = req.files.albumArt.name;
+    const uniqueFileId = trackName + fileExt;
+    fileName = './public/albumArt/';
+    try {
+        await User.updateOne({ _id: req.userId, "tracks.name": trackName }, { $set: { "tracks.$.albumArt": uniqueFileId } })
+        req.files.file0.mv(fileName + uniqueFileId);
+        console.log('Image uploaded : ' + str);
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const videoUpload = async (req, res) => {
+    folderName = './public/videos/'
+    for (file of Object.values(req.files)) {
+        try {
+            fileName = req.userId + '_' + file.name
+            await User.updateOne({ _id: req.userId }, { $push: { videos: { name: fileName } } })
+            await file.mv(folderName + fileName);
+            console.log('Video uploaded : ' + fileName);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
 module.exports = {
     userSignupPost,
     userLoginPost,
     bookingsGet,
     requestsGet,
-    profileGet
+    profileGet,
+    imageUpload,
+    trackUpload,
+    albumArtUpload,
+    videoUpload,
+    deleteTrack,
+    deleteVideo,
 }

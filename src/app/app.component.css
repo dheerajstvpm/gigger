@@ -1,7 +1,30 @@
+#userRoute {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 #userHeader {
     display: flex;
     background-color: #1f1f1f;
     justify-content: space-between;
+    min-height: 50px
+}
+
+#userRouteOutlet {
+    flex: 1;
+}
+
+#userFooter {
+    background-color: #1f1f1f;
+    font-size: small;
+    font-weight: normal;
+    margin-bottom: 0;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 #userHeader a {
@@ -9,8 +32,13 @@
     color: #cfcfcf;
 }
 
+#adminRoute {
+    display: flex;
+}
+
 #logo {
-    font-size:xx-large;
+    font-size: xx-large;
+    font-weight: normal;
 }
 
 .logoDiv {
@@ -30,13 +58,25 @@ ul li {
     margin-right: 15px;
 }
 
-#signUpButton{
-    border-radius: 12px;
-    margin-top: 10px;
-    color: #2f2f2f;
-    background-color: #cfcfcf;
-    width: 100px;
-    height: 40px;
+.headerButton {
+    border: 2px solid #cfcfcf;
+    border-radius: 10px;
+}
+
+#signupButton {
+    background-color: #28A64B;
+}
+
+#signupButton a {
+    color: #ffffff;
+}
+
+#logoutButton {
+    background-color: #e91e63;
+}
+
+#logoutButton a {
+    color: #ffffff;
 }
 
 #adminTab {
@@ -55,21 +95,21 @@ ul li {
     color: #1f1f1f;
 }
 
-.dashboardDiv{
+.dashboardDiv {
     margin-top: 50px;
 }
 
-.dashboardDiv ul{
+.dashboardDiv ul {
     padding-left: 0%;
 }
 
-.dashboardDiv li{
+.dashboardDiv li {
     padding-left: 0%;
     margin-top: 20px;
     font-size: large;
 }
 
-.dashboardDiv a:hover{
+.dashboardDiv a:hover {
     padding-left: 0%;
     font-size: larger;
 }

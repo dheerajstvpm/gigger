@@ -44,4 +44,16 @@ router.get('/requests', userController.requestsGet);
 
 router.get('/profile', middlewares.verifyToken, userController.profileGet);
 
+router.post('/imageUpload', middlewares.verifyToken, userController.imageUpload);
+
+router.post('/trackUpload', middlewares.verifyToken, userController.trackUpload);
+
+router.post('/albumArtUpload', middlewares.verifyToken, userController.albumArtUpload);
+
+router.post('/videoUpload', middlewares.verifyToken, userController.videoUpload);
+
+router.post('/trackDelete', middlewares.verifyToken, userController.deleteTrack);
+
+router.post('/videoDelete', middlewares.verifyToken, userController.deleteVideo);
+
 module.exports = router;
