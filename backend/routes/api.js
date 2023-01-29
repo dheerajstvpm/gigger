@@ -38,22 +38,22 @@ router.post('/login', userController.userLoginPost);
 
 router.get('/bookings', userController.bookingsGet);
 
-router.get('/requests', userController.requestsGet);
-
 // router.get('/token', middlewares.validToken);
 
 router.get('/profile', middlewares.verifyToken, userController.profileGet);
 
-router.post('/imageUpload', middlewares.verifyToken, userController.imageUpload);
+router.post('/imageUpload', middlewares.verifyToken, middlewares.imageUpload, userController.profileGet);
 
-router.post('/trackUpload', middlewares.verifyToken, userController.trackUpload);
+router.post('/trackUpload', middlewares.verifyToken, middlewares.trackUpload, userController.profileGet);
 
-router.post('/albumArtUpload', middlewares.verifyToken, userController.albumArtUpload);
+router.post('/albumArtUpload', middlewares.verifyToken, middlewares.albumArtUpload, userController.profileGet);
 
-router.post('/videoUpload', middlewares.verifyToken, userController.videoUpload);
+router.post('/videoUpload', middlewares.verifyToken, middlewares.videoUpload, userController.profileGet);
 
-router.post('/trackDelete', middlewares.verifyToken, userController.deleteTrack);
+router.post('/thumbnailUpload', middlewares.verifyToken, middlewares.thumbnailUpload, userController.profileGet);
 
-router.post('/videoDelete', middlewares.verifyToken, userController.deleteVideo);
+router.post('/trackDelete', middlewares.verifyToken, middlewares.deleteTrack, userController.profileGet);
+
+router.post('/videoDelete', middlewares.verifyToken, middlewares.deleteVideo, userController.profileGet);
 
 module.exports = router;

@@ -15,9 +15,25 @@ export class ProfileComponent {
     profile!: User
     fileName = '';
     track = '';
+    video='';
     editOn: boolean = true;
+    videoOn: boolean = false;
 
     constructor(private http: HttpClient, private dataService: DataService, private router: Router) { }
+
+    startVideo(video: HTMLImageElement) {
+        this.video = video.id
+        this.videoOn = true
+        console.log(this.videoOn);
+        console.log(this.video);
+    }
+
+    stopVideo() {
+        this.video = ''
+        this.videoOn = false
+        console.log(this.videoOn);
+        console.log(this.video);
+    }
 
     changeTrack(track: HTMLImageElement) {
         this.track = track.id
@@ -76,6 +92,9 @@ export class ProfileComponent {
         }
         if (event.target.className === "video-input") {
             uploadUrl = "http://localhost:3000/api/videoUpload"
+        }
+        if (event.target.className === "thumbnail-input") {
+            uploadUrl = "http://localhost:3000/api/thumbnailUpload"
         }
         const blob = new Blob();
         formData.append("albumArt", blob, albumId);

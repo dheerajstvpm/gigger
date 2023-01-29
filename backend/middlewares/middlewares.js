@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer");
 const { check, validationResult } = require('express-validator');
+var fs = require('fs');
 
 const userController = require('../controllers/userController')
 const User = require("../models/userDetails")
@@ -103,46 +104,180 @@ const verifyOTP = async (req, res) => {
     }
 }
 
-const onFileupload = async (req, res) => {
-    console.log(req.path);
-    console.log(req.files);
-    console.log(currentUser.id);
-    if (req.path === "/imageUpload") {
+// const onFileupload = async (req, res) => {
+//     console.log(req.path);
+//     console.log(req.files);
+//     console.log(currentUser.id);
+//     if (req.path === "/imageUpload") {
 
-    }
-    if (req.path === "/trackUpload") {
+//     }
+//     if (req.path === "/trackUpload") {
 
+//     }
+//     if (req.path === "/albumArtUpload") {
+//         const albumArt = req.files.albumArt.name;
+//         console.log(albumArt);
+//         const str = req.files.file0.name;
+//         const n = str.lastIndexOf('.');
+//         const fileExt = str.substring(n);
+//         const trackName = req.files.albumArt.name;
+//         const uniqueFileId = trackName + fileExt;
+//         fileName = './public/albumArt/';
+//         try {
+//             await User.updateOne({ _id: currentUser.id, "tracks.name": trackName }, { $set: { "tracks.$.albumArt": uniqueFileId } })
+//             req.files.file0.mv(fileName + uniqueFileId);
+//             console.log('Image uploaded : ' + str);
+//         } catch (err) {
+//             console.log(err)
+//         }
+//     }
+//     if (req.path === "/videoUpload") {
+//         folderName = './public/videos/'
+//         for (file of Object.values(req.files)) {
+//             try {
+//                 fileName = currentUser.id + '_' + file.name
+//                 await User.updateOne({ _id: currentUser.id }, { $push: { videos: { name: fileName } } })
+//                 await file.mv(folderName + fileName);
+//                 console.log('Video uploaded : ' + fileName);
+//             } catch (err) {
+//                 console.log(err)
+//             }
+//         }
+//     }
+// }
+
+
+const deleteTrack = async (req, res, next) => {
+    console.log(req.body);
+    console.log(req.userId);
+    const deleted = await User.updateOne({ _id: req.userId }, { $pull: { tracks: { _id: req.body._id } } })
+    console.log(deleted);
+    if (fs.existsSync('./public/tracks/' + req.body.name)) {
+        fs.unlinkSync('./public/tracks/' + req.body.name)
+        console.log('file deleted successfully');
     }
-    if (req.path === "/albumArtUpload") {
-        const albumArt = req.files.albumArt.name;
-        console.log(albumArt);
-        const str = req.files.file0.name;
-        const n = str.lastIndexOf('.');
-        const fileExt = str.substring(n);
-        const trackName = req.files.albumArt.name;
-        const uniqueFileId = trackName + fileExt;
-        fileName = './public/albumArt/';
+    if (fs.existsSync('./public/albumArt/' + req.body.albumArt)) {
+        fs.unlinkSync('./public/albumArt/' + req.body.albumArt)
+        console.log('albumArt deleted successfully');
+    }
+    // fs.stat('./public/tracks/' + req.body.name, function (err, stats) {
+    //     console.log(stats);//here we got all information of file in stats variable
+    //     if (err) {
+    //         console.error(err);
+    //     }else{
+    //         fs.unlink('./server/upload/my.csv', function (err) {
+    //             if (err) return console.log(err);
+    //             console.log('file deleted successfully');
+    //         });
+    //     }
+    // });
+    // fs.stat('./public/albumArt/' + req.body.albumArt, function (err, stats) {
+    //     console.log(stats);//here we got all information of file in stats variable
+
+    //     if (err) {
+    //         return console.error(err);
+    //     }
+
+    //     fs.unlink('./server/upload/my.csv', function (err) {
+    //         if (err) return console.log(err);
+    //         console.log('file deleted successfully');
+    //     });
+    // });
+    // fs.unlinkSync('./public/albumArt/'+req.body.albumArt)
+    next()
+}
+
+const deleteVideo = async (req, res, next) => {
+    console.log(req.body);
+    console.log(req.userId);
+    await User.updateOne({ _id: req.userId }, { $pull: { videos: { _id: req.body._id } } })
+    fs.unlinkSync(req.body.name)
+    fs.unlinkSync(req.body.albumArt)
+    next()
+}
+
+const imageUpload = async (req, res, next) => {
+    const str = req.files.file0.name;
+    const n = str.lastIndexOf('.');
+    const fileExt = str.substring(n);
+    const uniqueFileId = req.userId + fileExt
+    folderName = './public/images/'
+    try {
+        await User.updateOne({ _id: req.userId }, { $set: { profileImage: uniqueFileId } })
+        req.files.file0.mv(folderName + uniqueFileId);
+        console.log('Image uploaded : ' + str);
+    } catch (err) {
+        console.log(err)
+    }
+    next()
+}
+
+const trackUpload = async (req, res, next) => {
+    folderName = './public/tracks/'
+    for (file of Object.values(req.files)) {
         try {
-            await User.updateOne({ _id: currentUser.id, "tracks.name": trackName }, { $set: { "tracks.$.albumArt": uniqueFileId } })
-            req.files.file0.mv(fileName + uniqueFileId);
-            console.log('Image uploaded : ' + str);
+            fileName = req.userId + '_' + file.name
+            await User.updateOne({ _id: req.userId }, { $push: { tracks: { name: fileName } } })
+            await file.mv(folderName + fileName);
+            console.log('Track uploaded : ' + fileName);
         } catch (err) {
             console.log(err)
         }
     }
-    if (req.path === "/videoUpload") {
-        folderName = './public/videos/'
-        for (file of Object.values(req.files)) {
-            try {
-                fileName = currentUser.id + '_' + file.name
-                await User.updateOne({ _id: currentUser.id }, { $push: { videos: { name: fileName } } })
-                await file.mv(folderName + fileName);
-                console.log('Video uploaded : ' + fileName);
-            } catch (err) {
-                console.log(err)
-            }
+    next()
+}
+
+const albumArtUpload = async (req, res, next) => {
+    const albumArt = req.files.albumArt.name;
+    console.log(albumArt);
+    const str = req.files.file0.name;
+    const n = str.lastIndexOf('.');
+    const fileExt = str.substring(n);
+    const trackName = req.files.albumArt.name;
+    const uniqueFileId = trackName + fileExt;
+    folderName = './public/albumArt/';
+    try {
+        await User.updateOne({ _id: req.userId, "tracks.name": trackName }, { $set: { "tracks.$.albumArt": uniqueFileId } })
+        req.files.file0.mv(folderName + uniqueFileId);
+        console.log('Image uploaded : ' + str);
+    } catch (err) {
+        console.log(err)
+    }
+    next()
+}
+
+const videoUpload = async (req, res, next) => {
+    folderName = './public/videos/'
+    for (file of Object.values(req.files)) {
+        try {
+            fileName = req.userId + '_' + file.name
+            await User.updateOne({ _id: req.userId }, { $push: { videos: { name: fileName } } })
+            await file.mv(folderName + fileName);
+            console.log('Video uploaded : ' + fileName);
+        } catch (err) {
+            console.log(err)
         }
     }
+    next()
+}
+
+const thumbnailUpload = async (req, res, next) => {
+    const albumArt = req.files.albumArt.name;
+    console.log(albumArt);
+    const str = req.files.file0.name;
+    const n = str.lastIndexOf('.');
+    const fileExt = str.substring(n);
+    const trackName = req.files.albumArt.name;
+    const uniqueFileId = trackName + fileExt;
+    folderName = './public/thumbnail/';
+    try {
+        await User.updateOne({ _id: req.userId, "videos.name": trackName }, { $set: { "videos.$.thumbnail": uniqueFileId } })
+        req.files.file0.mv(folderName + uniqueFileId);
+        console.log('Image uploaded : ' + str);
+    } catch (err) {
+        console.log(err)
+    }
+    next()
 }
 
 
@@ -153,5 +288,11 @@ module.exports = {
     verifyOTP,
     // validToken,
     verifyToken,
-    onFileupload,
+    imageUpload,
+    trackUpload,
+    albumArtUpload,
+    videoUpload,
+    deleteTrack,
+    deleteVideo,
+    thumbnailUpload,
 }
