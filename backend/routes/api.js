@@ -36,11 +36,15 @@ router.post('/signup',
 
 router.post('/login', userController.userLoginPost);
 
-router.get('/bookings', userController.bookingsGet);
+router.post('/adminLogin', userController.adminLoginPost);
+
+router.get('/users', middlewares.verifyToken, userController.usersGet);
 
 // router.get('/token', middlewares.validToken);
 
 router.get('/profile', middlewares.verifyToken, userController.profileGet);
+
+router.post('/profile', middlewares.verifyToken, userController.profilePost);
 
 router.post('/imageUpload', middlewares.verifyToken, middlewares.imageUpload, userController.profileGet);
 

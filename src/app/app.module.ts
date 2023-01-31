@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { DataTablesModule } from "angular-datatables";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,8 +18,9 @@ import { DashboardComponent } from './adminComponents/dashboard/dashboard.compon
 import { ArtistDetailsComponent } from './adminComponents/artist-details/artist-details.component';
 import { UserDetailsComponent } from './adminComponents/user-details/user-details.component';
 import { BookingDetailsComponent } from './adminComponents/booking-details/booking-details.component';
-import { RequestDetailsComponent } from './adminComponents/request-details/request-details.component';
 import { VerifyOTPComponent } from './components/verify-otp/verify-otp.component';
+import { PaymentDetailsComponent } from './adminComponents/payment-details/payment-details.component';
+import { AdminLoginComponent } from './adminComponents/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +32,9 @@ import { VerifyOTPComponent } from './components/verify-otp/verify-otp.component
     ArtistDetailsComponent,
     UserDetailsComponent,
     BookingDetailsComponent,
-    RequestDetailsComponent,
-    VerifyOTPComponent
+    VerifyOTPComponent,
+    PaymentDetailsComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,9 @@ import { VerifyOTPComponent } from './components/verify-otp/verify-otp.component
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
+  
   ],
   providers: [AuthService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,

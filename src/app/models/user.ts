@@ -1,8 +1,8 @@
 export interface User {
     _id?: string;
     name?: string;
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
     artistFlag?: boolean;
     blockStatus?:boolean;
     aboutMe?: string;

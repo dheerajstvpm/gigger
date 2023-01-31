@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
+button{
+    background-color: #1f1f1f;
+}
+
+#blockBtn{
+    background-color: indianred;
+}

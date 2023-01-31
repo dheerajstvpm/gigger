@@ -1,1 +1,23 @@
-<p>artist-details works!</p>
+<div class="container">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+            <tr>
+                <th>Sl.</th>
+                <th>Artist name</th>
+                <th>Username</th>
+                <th>Block status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let artist of artists; index as i">
+                <td>{{i+1}}</td>
+                <td>{{artist.name}}</td>
+                <td>{{artist.username}}</td>
+                <td>
+                    <button id="blockBtn" mat-raised-button *ngIf="!artist.blockStatus" (click)="blockUser(artist)">Block</button>
+                    <button id="unblockBtn" mat-raised-button *ngIf="artist.blockStatus" (click)="unblockUser(artist)">Unblock</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

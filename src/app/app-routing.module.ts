@@ -7,8 +7,9 @@ import { AuthGuard } from "./auth.guard";
 import { ArtistDetailsComponent } from './adminComponents/artist-details/artist-details.component';
 import { UserDetailsComponent } from './adminComponents/user-details/user-details.component';
 import { BookingDetailsComponent } from './adminComponents/booking-details/booking-details.component';
-import { RequestDetailsComponent } from './adminComponents/request-details/request-details.component';
+import { AdminLoginComponent } from './adminComponents/admin-login/admin-login.component';
 import { DashboardComponent } from './adminComponents/dashboard/dashboard.component';
+import { PaymentDetailsComponent } from './adminComponents/payment-details/payment-details.component';
 
 const routes: Routes = [
   {
@@ -31,8 +32,12 @@ const routes: Routes = [
   },
   {
     path: "admin",
-    redirectTo: "/admin/dashboard",
+    redirectTo: "/loginAdmin",
     pathMatch: "full"
+  },
+  {
+    path: "loginAdmin",
+    component: AdminLoginComponent
   },
   {
     path: "admin/dashboard",
@@ -51,9 +56,10 @@ const routes: Routes = [
     component: BookingDetailsComponent
   },
   {
-    path: "admin/requestDetails",
-    component: RequestDetailsComponent
-  }
+    path: "admin/paymentDetails",
+    component: PaymentDetailsComponent
+  },
+
 ];
 
 @NgModule({

@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 var bcrypt = require('bcryptjs');
 
 const User = require("../models/userDetails")
-const Booking = require("../models/bookingDetails")
+const Admin = require("../models/adminDetails")
 
 const userSignupPost = async (req, res) => {
     if (req.body.otp === '') {
@@ -39,7 +39,10 @@ const userLoginPost = async (req, res) => {
         if (!user) {
             res.send({ loginError: "Invalid username" });
         } else {
-            bcrypt.compare(req.body.password, user.password)
+            if(user.blockStatus){
+                res.send({ loginError: "User blocked" });
+            }else{
+                bcrypt.compare(req.body.password, user.password)
                 .then(function (bcryptResult) {
                     if (bcryptResult) {
                         const payload = { subject: user._id }
@@ -52,16 +55,46 @@ const userLoginPost = async (req, res) => {
                 .catch((err) => {
                     console.log(err)
                 });
+            }
         }
     } catch (err) {
         console.log(err);
     }
 }
 
-const bookingsGet = async (req, res) => {
+const adminLoginPost = async (req, res) => {
     try {
-        const bookings = await Booking.find({})
-        res.json(bookings)
+        const user = await Admin.findOne({ username: req.body.username })
+        if (!user) {
+            res.send({ loginError: "Invalid username" });
+        } else {
+            if(user.blockStatus){
+                res.send({ loginError: "User blocked" });
+            }else{
+                bcrypt.compare(req.body.password, user.password)
+                .then(function (bcryptResult) {
+                    if (bcryptResult) {
+                        const payload = { subject: user._id }
+                        const token = jwt.sign(payload, process.env.jwtKey)
+                        res.send({ token })
+                    } else {
+                        res.send({ loginError: "Invalid password" })
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            }
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const usersGet = async (req, res) => {
+    try {
+        const users = await User.find({}).select('-password')
+        res.json(users)
     } catch (err) {
         console.log(err)
     }
@@ -69,7 +102,18 @@ const bookingsGet = async (req, res) => {
 
 const profileGet = async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.userId });
+        const user = await User.findOne({ _id: req.userId }).select('-password');
+        // console.log(user._id);
+        res.send(user)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const profilePost = async (req, res) => {
+    try {
+        await User.updateOne({ _id: req.userId },{$set:{blockStatus:req.body.blockStatus}});
+        const user = await User.findOne({ _id: req.userId }).select('-password');
         console.log(user._id);
         res.send(user)
     } catch (err) {
@@ -80,6 +124,8 @@ const profileGet = async (req, res) => {
 module.exports = {
     userSignupPost,
     userLoginPost,
-    bookingsGet,
+    usersGet,
     profileGet,
+    profilePost,
+    adminLoginPost
 }

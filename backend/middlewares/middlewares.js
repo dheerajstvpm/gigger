@@ -160,30 +160,6 @@ const deleteTrack = async (req, res, next) => {
         fs.unlinkSync('./public/albumArt/' + req.body.albumArt)
         console.log('albumArt deleted successfully');
     }
-    // fs.stat('./public/tracks/' + req.body.name, function (err, stats) {
-    //     console.log(stats);//here we got all information of file in stats variable
-    //     if (err) {
-    //         console.error(err);
-    //     }else{
-    //         fs.unlink('./server/upload/my.csv', function (err) {
-    //             if (err) return console.log(err);
-    //             console.log('file deleted successfully');
-    //         });
-    //     }
-    // });
-    // fs.stat('./public/albumArt/' + req.body.albumArt, function (err, stats) {
-    //     console.log(stats);//here we got all information of file in stats variable
-
-    //     if (err) {
-    //         return console.error(err);
-    //     }
-
-    //     fs.unlink('./server/upload/my.csv', function (err) {
-    //         if (err) return console.log(err);
-    //         console.log('file deleted successfully');
-    //     });
-    // });
-    // fs.unlinkSync('./public/albumArt/'+req.body.albumArt)
     next()
 }
 
@@ -191,8 +167,14 @@ const deleteVideo = async (req, res, next) => {
     console.log(req.body);
     console.log(req.userId);
     await User.updateOne({ _id: req.userId }, { $pull: { videos: { _id: req.body._id } } })
-    fs.unlinkSync(req.body.name)
-    fs.unlinkSync(req.body.albumArt)
+    if (fs.existsSync('./public/videos/' + req.body.name)) {
+        fs.unlinkSync('./public/videos/' + req.body.name)
+        console.log('file deleted successfully');
+    }
+    if (fs.existsSync('./public/thumbnail/' + req.body.albumArt)) {
+        fs.unlinkSync('./public/thumbnail/' + req.body.albumArt)
+        console.log('albumArt deleted successfully');
+    }
     next()
 }
 

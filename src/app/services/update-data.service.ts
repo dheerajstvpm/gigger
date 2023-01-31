@@ -5,17 +5,13 @@ import { User } from "../models/user";
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class UpdateDataService {
 
-  private usersUrl="http://localhost:3000/api/users"
   private profileUrl="http://localhost:3000/api/profile"
   
   constructor(private http:HttpClient) { }
 
-  getUsers(){
-    return this.http.get<User[]>(this.usersUrl)
-  }
-  getProfile(){
-    return this.http.get<User>(this.profileUrl)
+  updateProfile(user:User){
+    return this.http.post<User>(this.profileUrl,user)
   }
 }

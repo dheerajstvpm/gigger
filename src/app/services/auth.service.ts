@@ -11,6 +11,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 export class AuthService {
     private signupUrl = "http://localhost:3000/api/signup"
     private loginUrl = "http://localhost:3000/api/login"
+    private adminLoginUrl = "http://localhost:3000/api/adminLogin"
     // private tokenUrl = "http://localhost:3000/api/token"
 
     loginStatus: boolean = false
@@ -23,7 +24,9 @@ export class AuthService {
     adminRoute() {
         return /^(\/admin).*/g.test(this.router.url);
     }
-
+    adminLoginRoute(){
+        return /^(\/loginAdmin)/g.test(this.router.url);
+    }
     signupUser(user: User) {
         return this.http.post<{ token: string, signupError: string }>(this.signupUrl, user)
     }
@@ -39,6 +42,13 @@ export class AuthService {
     logout() {
         localStorage.removeItem('token')
         this.router.navigate(['/user/login'])
+    }
+    adminLogin(user: {username:string, password:string}) {
+        return this.http.post<{ token: string, loginError: string }>(this.adminLoginUrl, user)
+    }
+    adminLogout() {
+        localStorage.removeItem('token')
+        this.router.navigate(['/loginAdmin'])
     }
 }
 

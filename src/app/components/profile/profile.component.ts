@@ -11,7 +11,6 @@ import { User } from "../../models/user";
 })
 export class ProfileComponent {
 
-    artistFlag: boolean = false
     profile!: User
     fileName = '';
     track = '';
@@ -28,7 +27,8 @@ export class ProfileComponent {
         console.log(this.video);
     }
 
-    stopVideo() {
+    stopVideo(videoPlayer: HTMLVideoElement) {
+        // videoPlayer.pause()
         this.video = ''
         this.videoOn = false
         console.log(this.videoOn);
@@ -46,6 +46,7 @@ export class ProfileComponent {
         deleteTrack$.subscribe({
             next: (res) => {
                 console.log(res);
+                this.profile = res
             },
             error: (err) => {
                 console.log(err);
@@ -53,12 +54,13 @@ export class ProfileComponent {
         })
     }
 
-    deleteVideo(video: { name: string }) {
+    deleteVideo(video: { name: string, thumbnail?: string }) {
         const deleteUrl = "http://localhost:3000/api/videoDelete"
         const deleteVideo$ = this.http.post(deleteUrl, video);
         deleteVideo$.subscribe({
             next: (res) => {
                 console.log(res);
+                this.profile = res
             },
             error: (err) => {
                 console.log(err);
@@ -70,7 +72,6 @@ export class ProfileComponent {
         const files: File[] = event.target.files;
         console.log(event.target.className);
         console.log(albumId);
-
         const formData = new FormData();
         let i = 0;
         for (let file of files) {
@@ -102,6 +103,7 @@ export class ProfileComponent {
         upload$.subscribe({
             next: (res) => {
                 console.log(res);
+                this.profile = res
             },
             error: (err) => {
                 console.log(err);
@@ -122,7 +124,6 @@ export class ProfileComponent {
             .subscribe({
                 next: (res) => {
                     console.log(`res:${res._id}`)
-                    this.artistFlag = res.artistFlag
                     this.profile = res
                 },
                 error: (err) => {

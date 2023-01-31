@@ -75,12 +75,21 @@
                     <a routerLink="/admin/bookingDetails" routerLinkActive="active">Booking details</a>
                 </li>
                 <li>
-                    <a routerLink="/admin/requestDetails" routerLinkActive="active">Request details</a>
+                    <a routerLink="/admin/paymentDetails" routerLinkActive="active">Payment details</a>
+                </li>
+                <li>
+                    <a (click)="auth.adminLogout()" routerLinkActive="active">Logout</a>
                 </li>
             </ul>
         </div>
     </mat-toolbar>
     <div id="adminRouteOutlet">
+        <header>Gigger admin</header>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div *ngIf="auth.adminLoginRoute()" id="adminRoute">
+    <div id="adminLoginRoute">
         <router-outlet></router-outlet>
     </div>
 </div>
