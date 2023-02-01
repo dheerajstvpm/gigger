@@ -9,8 +9,8 @@ export interface User {
     soloEventPricing?: Number,
     bandEventPricing?: Number,
     profileImage?: string;
-    tracks?: [{ name: string, albumArt?: string }];
-    videos?: [{ name: string, thumbnail?: string }];
+    tracks?: [{ name: string, albumArt: string }];
+    videos?: [{ name: string, thumbnail: string }];
     eventBookings?: [];
     favouriteTracks?: [];
     favouriteArtists?: [];

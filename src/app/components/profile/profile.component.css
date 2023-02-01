@@ -31,8 +31,9 @@
 .addContent {
     display: flex;
     flex-direction: column;
+    gap: 20px;
     justify-content: flex-start;
-    margin-left: 60px;
+    margin: 20px 0 20px 40px;
 }
 
 .imageDiv{
@@ -166,7 +167,13 @@ img {
 .tracksListDiv{
     display: flex;
 }
-
+.videosListDiv{
+    display: flex;
+}
+.itemName{
+    margin-left: 10px;
+    width: 160px;
+}
 .tabGroup {
     width: 90%;
 }
@@ -228,7 +235,4 @@ button {
     align-items: center;
 }
 
-button mat-icon {
-    margin-left: 5px;
-}
 

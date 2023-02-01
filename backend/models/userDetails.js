@@ -17,8 +17,8 @@ const userSchema = new Schema({
         type: [],
         default: []
     },
-    tracks: [{ name: String, albumArt: String }],
-    videos: [{ name: String, thumbnail: String }],
+    tracks: [{ name: String, albumArt: String, title: String }],
+    videos: [{ name: String, thumbnail: String, title: String }],
     contactRequests: [],
     eventBookings: [],
     favouriteTracks: [],

@@ -112,9 +112,9 @@ const profileGet = async (req, res) => {
 
 const profilePost = async (req, res) => {
     try {
-        await User.updateOne({ _id: req.userId },{$set:{blockStatus:req.body.blockStatus}});
+        console.log(req.body);
+        await User.findOneAndUpdate({ _id: req.userId },{$set:{'blockStatus':req.body.blockStatus}});
         const user = await User.findOne({ _id: req.userId }).select('-password');
-        console.log(user._id);
         res.send(user)
     } catch (err) {
         console.log(err)

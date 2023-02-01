@@ -21,6 +21,9 @@ import { BookingDetailsComponent } from './adminComponents/booking-details/booki
 import { VerifyOTPComponent } from './components/verify-otp/verify-otp.component';
 import { PaymentDetailsComponent } from './adminComponents/payment-details/payment-details.component';
 import { AdminLoginComponent } from './adminComponents/admin-login/admin-login.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { RemovePrefixPipe } from './pipes/remove-prefix.pipe';
+
 
 @NgModule({
   declarations: [
@@ -34,8 +37,11 @@ import { AdminLoginComponent } from './adminComponents/admin-login/admin-login.c
     BookingDetailsComponent,
     VerifyOTPComponent,
     PaymentDetailsComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    DialogComponent,
+    RemovePrefixPipe
   ],
+  entryComponents:[DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

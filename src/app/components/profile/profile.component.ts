@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
+import { UpdateDataService } from "../../services/update-data.service";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from "../dialog/dialog.component";
 
 @Component({
     selector: 'app-profile',
@@ -14,11 +17,18 @@ export class ProfileComponent {
     profile!: User
     fileName = '';
     track = '';
-    video='';
+    video = '';
     editOn: boolean = true;
     videoOn: boolean = false;
+    trackName: string = ''
 
-    constructor(private http: HttpClient, private dataService: DataService, private router: Router) { }
+    constructor(
+        private http: HttpClient,
+        private dataService: DataService,
+        private updateDataService: UpdateDataService,
+        private router: Router,
+        public dialog: MatDialog
+    ) { }
 
     startVideo(video: HTMLImageElement) {
         this.video = video.id
@@ -40,33 +50,7 @@ export class ProfileComponent {
         console.log(this.track);
     }
 
-    deleteTrack(track: { name: string, albumArt?: string }) {
-        const deleteUrl = "http://localhost:3000/api/trackDelete"
-        const deleteTrack$ = this.http.post(deleteUrl, track);
-        deleteTrack$.subscribe({
-            next: (res) => {
-                console.log(res);
-                this.profile = res
-            },
-            error: (err) => {
-                console.log(err);
-            }
-        })
-    }
 
-    deleteVideo(video: { name: string, thumbnail?: string }) {
-        const deleteUrl = "http://localhost:3000/api/videoDelete"
-        const deleteVideo$ = this.http.post(deleteUrl, video);
-        deleteVideo$.subscribe({
-            next: (res) => {
-                console.log(res);
-                this.profile = res
-            },
-            error: (err) => {
-                console.log(err);
-            }
-        })
-    }
 
     onFileSelected(event: any, albumId: string) {
         const files: File[] = event.target.files;
@@ -117,6 +101,16 @@ export class ProfileComponent {
 
     submitToggle() {
         this.editOn = true
+        this.updateDataService.updateProfile(this.profile)
+            .subscribe({
+                next: res => {
+                    console.log(`res:${res}`);
+                    this.profile = res
+                },
+                error: err => {
+                    console.log(`err:${err}`);
+                }
+            })
     }
 
     ngOnInit() {
@@ -135,5 +129,35 @@ export class ProfileComponent {
                     }
                 }
             })
+    }
+
+    openTrackDialog(item: { name: string, albumArt: string }) {
+        const nameStr = item.name.substring(item.name.indexOf("_") + 1);
+        const dialogRef = this.dialog.open(DialogComponent, {
+            data: {
+                title: nameStr,
+                videoflag:false,
+                item: item
+            }
+        });
+        dialogRef.afterClosed()
+            .subscribe(
+                data => console.log("Dialog output:", data)
+            )
+    }
+
+    openVideoDialog(item: { name: string, thumbnail: string }) {
+        const nameStr = item.name.substring(item.name.indexOf("_") + 1);
+        const dialogRef = this.dialog.open(DialogComponent, {
+            data: {
+                title: nameStr,
+                videoFlag:true,
+                item: item
+            }
+        });
+        dialogRef.afterClosed()
+            .subscribe(
+                data => console.log("Dialog output:", data)
+            )
     }
 }

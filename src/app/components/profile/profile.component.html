@@ -1,6 +1,6 @@
-<br>
+<!-- <br>
 <p *ngIf="!profile.artistFlag">Profile of User {{profile|json}}</p>
-<p *ngIf="profile.artistFlag">Profile of Artist {{profile|json}}</p>
+<p *ngIf="profile.artistFlag">Profile of Artist {{profile|json}}</p> -->
 
 <button *ngIf="editOn" mat-mini-fab (click)="editToggle()" class="roundButton" id="editButton">
     <mat-icon fontIcon="edit"></mat-icon>
@@ -15,13 +15,18 @@
             <div class="file-upload">
                 <!-- {{fileName || "No file uploaded yet."}} -->
                 <div *ngIf="!editOn" class="imgA1" (click)="imageUpload.click()">
-                    <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+                    <img *ngIf='profile.profileImage' src="http://localhost:3000/images/{{profile.profileImage}}"
+                        alt="profile">
+                    <img *ngIf='!profile.profileImage'
+                        src="http://localhost:3000/images/istockphoto-1248723171-612x612.jpeg"
+                        alt="profile placeholder">
                 </div>
                 <div *ngIf="editOn" class="imgA2">
                     <img *ngIf='profile.profileImage' src="http://localhost:3000/images/{{profile.profileImage}}"
                         alt="profile">
                     <img *ngIf='!profile.profileImage'
-                        src="http://localhost:3000/images/istockphoto-1248723171-612x612.jpeg" alt="profile">
+                        src="http://localhost:3000/images/istockphoto-1248723171-612x612.jpeg"
+                        alt="profile placeholder">
                 </div>
             </div>
         </div>
@@ -29,7 +34,7 @@
             <div>Personal details</div>
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
-                <input matInput value="{{profile.name}}" [disabled]="editOn">
+                <input matInput value="{{profile.name}}" [(ngModel)]="profile.name" [disabled]="editOn">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
@@ -39,17 +44,17 @@
         <div class="aboutMeDiv">
             <div>About Me</div>
             <mat-form-field class="example-full-width">
-                <textarea matInput value="{{profile.aboutMe}}" [disabled]="editOn"></textarea>
+                <textarea matInput value="{{profile.aboutMe}}" [(ngModel)]="profile.aboutMe"
+                    [disabled]="editOn"></textarea>
             </mat-form-field>
         </div>
     </div>
-    <div class="addContent">
-        <div>Tracks</div>
+    <div *ngIf="profile.artistFlag" class="addContent">
+        <div>Upload tracks</div>
         <div class="tracksListDiv">
-            <div *ngFor="let item of profile.tracks">
-                <button *ngIf="!editOn" (click)="deleteTrack(item)" mat-mini-fab id="deleteButton">
-                    <mat-icon fontIcon="delete"></mat-icon>
-                </button>
+            <div class="itemDiv" *ngFor="let item of profile.tracks">
+                <button *ngIf="!editOn" mat-mini-fab id="deleteButton" (click)="openTrackDialog(item)"><mat-icon
+                        fontIcon="delete"></mat-icon></button>
                 <img *ngIf="item.albumArt && editOn" src="http://localhost:3000/albumArt/{{item.albumArt}}"
                     id="{{item.name}}" #track (click)="changeTrack(track)">
                 <img *ngIf="item.albumArt && !editOn" src="http://localhost:3000/albumArt/{{item.albumArt}}"
@@ -62,24 +67,24 @@
                 <img *ngIf="!item.albumArt && !editOn"
                     src="http://localhost:3000/albumArt/optimized_large_thumb_37278-.png" id="{{item.name}}"
                     (click)="albumArtUpload.click()">
+                <div class="itemName">{{item.name|removePrefix}}</div>
             </div>
-        </div>
-        <input type="file" multiple class="track-input" (change)="onFileSelected($event,'')" #trackUpload>
-        <div *ngIf="!editOn" class="contentDiv">
-            <div class="file-upload">
-                <div class="imgA1" (click)="trackUpload.click()">
-                    <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+            <input type="file" multiple class="track-input" (change)="onFileSelected($event,'')" #trackUpload>
+            <div *ngIf="!editOn" class="contentDiv">
+                <div class="file-upload">
+                    <div class="imgA1" (click)="trackUpload.click()">
+                        <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="addContent">
-        <div>Videos</div>
+    <div *ngIf="profile.artistFlag" class="addContent">
+        <div>Upload videos</div>
         <div class="videosListDiv">
-            <div *ngFor="let item of profile.videos">
-                <button *ngIf="!editOn" (click)="deleteVideo(item)" mat-mini-fab id="deleteButton">
-                    <mat-icon fontIcon="delete"></mat-icon>
-                </button>
+            <div class="itemDiv" *ngFor="let item of profile.videos">
+                <button *ngIf="!editOn" mat-mini-fab id="deleteButton" (click)="openVideoDialog(item)"><mat-icon
+                        fontIcon="delete"></mat-icon></button>
                 <img *ngIf="item.thumbnail && editOn" onclick="document.getElementById('player').pause()"
                     src="http://localhost:3000/thumbnail/{{item.thumbnail}}" id="{{item.name}}" #video
                     (click)="startVideo(video)" class="thumbnail">
@@ -93,18 +98,20 @@
                 <img *ngIf="!item.thumbnail && !editOn" src="http://localhost:3000/thumbnail/download.jpeg"
                     id="{{item.name}}" (click)="thumbnailUpload.click()" class="thumbnail">
                 <div *ngIf="videoOn" class="videoTag">
-                    <video *ngIf="videoOn" width="100%" height="100%" controls (click)="stopVideo(videoPlayer)" #videoPlayer>
+                    <video *ngIf="videoOn" width="100%" height="100%" controls (click)="stopVideo(videoPlayer)"
+                        #videoPlayer>
                         <source src="http://localhost:3000/videos/{{video}}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
+                <div class="itemName">{{item.name|removePrefix}}</div>
             </div>
-        </div>
-        <input type="file" class="video-input" (change)="onFileSelected($event,'')" #videoUpload>
-        <div *ngIf="!editOn" class="contentDiv">
-            <div class="file-upload">
-                <div class="imgA1" (click)="videoUpload.click()">
-                    <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+            <input type="file" class="video-input" (change)="onFileSelected($event,'')" #videoUpload>
+            <div *ngIf="!editOn" class="contentDiv">
+                <div class="file-upload">
+                    <div class="imgA1" (click)="videoUpload.click()">
+                        <mat-icon class="addIcon" fontIcon="add"></mat-icon>
+                    </div>
                 </div>
             </div>
         </div>
