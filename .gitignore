@@ -46,3 +46,4 @@ Thumbs.db
 
 #public
 /backend/public
+/node_modules

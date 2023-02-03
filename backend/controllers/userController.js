@@ -39,22 +39,22 @@ const userLoginPost = async (req, res) => {
         if (!user) {
             res.send({ loginError: "Invalid username" });
         } else {
-            if(user.blockStatus){
+            if (user.blockStatus) {
                 res.send({ loginError: "User blocked" });
-            }else{
+            } else {
                 bcrypt.compare(req.body.password, user.password)
-                .then(function (bcryptResult) {
-                    if (bcryptResult) {
-                        const payload = { subject: user._id }
-                        const token = jwt.sign(payload, process.env.jwtKey)
-                        res.send({ token })
-                    } else {
-                        res.send({ loginError: "Invalid password" })
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
+                    .then(function (bcryptResult) {
+                        if (bcryptResult) {
+                            const payload = { subject: user._id }
+                            const token = jwt.sign(payload, process.env.jwtKey)
+                            res.send({ token })
+                        } else {
+                            res.send({ loginError: "Invalid password" })
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    });
             }
         }
     } catch (err) {
@@ -68,22 +68,22 @@ const adminLoginPost = async (req, res) => {
         if (!user) {
             res.send({ loginError: "Invalid username" });
         } else {
-            if(user.blockStatus){
+            if (user.blockStatus) {
                 res.send({ loginError: "User blocked" });
-            }else{
+            } else {
                 bcrypt.compare(req.body.password, user.password)
-                .then(function (bcryptResult) {
-                    if (bcryptResult) {
-                        const payload = { subject: user._id }
-                        const token = jwt.sign(payload, process.env.jwtKey)
-                        res.send({ token })
-                    } else {
-                        res.send({ loginError: "Invalid password" })
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                });
+                    .then(function (bcryptResult) {
+                        if (bcryptResult) {
+                            const payload = { subject: user._id }
+                            const token = jwt.sign(payload, process.env.jwtKey)
+                            res.send({ token })
+                        } else {
+                            res.send({ loginError: "Invalid password" })
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    });
             }
         }
     } catch (err) {
@@ -113,7 +113,8 @@ const profileGet = async (req, res) => {
 const profilePost = async (req, res) => {
     try {
         console.log(req.body);
-        await User.findOneAndUpdate({ _id: req.userId },{$set:{'blockStatus':req.body.blockStatus}});
+        console.log(req.userId);
+        await User.findOneAndUpdate({ _id: req.body._id }, { $set: { 'blockStatus': req.body.blockStatus, 'name': req.body.name, 'aboutMe': req.body.aboutMe } });
         const user = await User.findOne({ _id: req.userId }).select('-password');
         res.send(user)
     } catch (err) {
