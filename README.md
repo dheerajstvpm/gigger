@@ -1,5 +1,8 @@
 # Gigger
 
+Gigger is a online platform to connect musicians and their fanbase. There are two type of users : Artists and fans. Artists can signup and in their profile, they can upload their music and videos and these will be available for their fans to use. Similarly fans can signup and add their beloved musicians to their favorites, listen to their music, watch their videos and book events . They can even connect with their favorite musicians through chat and live streams.
+#
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
 ## Development server
