@@ -4,7 +4,7 @@ export interface User {
     username?: string;
     password?: string;
     artistFlag?: boolean;
-    blockStatus?:boolean;
+    blockStatus?: boolean;
     aboutMe?: string;
     soloEventPricing?: Number,
     bandEventPricing?: Number,
@@ -12,8 +12,9 @@ export interface User {
     tracks?: [{ name: string, albumArt: string }];
     videos?: [{ name: string, thumbnail: string }];
     eventBookings?: [];
-    favouriteTracks?: [];
-    favouriteArtists?: [];
-    favouriteVideos?: [];
-    bookedHistory?: []
+    favouriteTracks?: [string];
+    favouriteArtists?: [string];
+    favouriteVideos?: [string];
+    bookedHistory?: [];
+    loginError?: string;
 }

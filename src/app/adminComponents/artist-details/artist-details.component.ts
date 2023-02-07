@@ -16,7 +16,12 @@ export class ArtistDetailsComponent {
     dtTrigger: Subject<any> = new Subject<any>()
     artists!: User[]
 
-    constructor(private dataService: DataService, private updateDataService: UpdateDataService, private router: Router) { }
+    constructor(
+        private dataService: DataService,
+        private updateDataService: UpdateDataService,
+        private router: Router
+    ) { }
+
     blockUser(artist: User) {
         artist.blockStatus = true
         this.updateDataService.updateProfile(artist)
@@ -57,7 +62,7 @@ export class ArtistDetailsComponent {
                 error: err => {
                     if (err instanceof HttpErrorResponse) {
                         if (err.status === 401 || 500) {
-                            console.log(`Error:${err}`)
+                            console.log(`Errori:${err}`)
                             this.router.navigate(['/loginAdmin'])
                         }
                     }

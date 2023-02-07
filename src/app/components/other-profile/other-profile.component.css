@@ -1,0 +1,238 @@
+.roundButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+}
+#editButton {
+    background-color: #e91e63;
+}
+#submitEdit {
+    background-color: #28A64B;
+}
+
+.profileDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.topDiv {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.addContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    margin: 20px 0 20px 40px;
+}
+
+.imageDiv{
+    position: relative;
+}
+.imageDiv img{
+    margin: 0;
+    object-fit: cover;
+}
+.image-input {
+    display: none;
+}
+.track-input {
+    display: none;
+}
+.albumArt-input {
+    display: none;
+}
+.video-input {
+    display: none;
+}
+.thumbnail-input {
+    display: none;
+}
+.file-upload {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-upload div{
+    height: 200px;
+    width: 160px;
+    border-radius: 15px;
+    border: 1px solid #dfdfdf;
+    object-fit: cover;
+}
+
+.imgA1 {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 160px;
+    border-radius: 15px;
+}
+
+.imgA2 {
+    z-index: 1;
+    /* position: absolute; */
+}
+
+.contentDiv{
+    margin: 20px 0 20px 20px;
+}
+
+.addIcon{
+    transform:scale(5);
+    color: #dfdfdf;
+}
+
+img {
+    margin: 10px;
+    height: 200px;
+    width: 160px;
+    border-radius: 15px;
+    border: 1px solid #dfdfdf;
+    object-fit: cover;
+}
+
+.thumbnail{
+    margin: 10px;
+    height: 200px;
+    width: 360px;
+    border-radius: 15px;
+    border: 1px solid #dfdfdf;
+    object-fit: cover;
+}
+
+#deleteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #dfdfdf;
+    margin: 20px 0 0 20px;
+}
+
+.detailsDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailsDiv mat-form-field {
+    max-width: 300px;
+    width: 30vw;
+    margin-top: 20px;
+}
+
+.aboutMeDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutMeDiv mat-form-field {
+    max-width: 300px;
+    width: 30vw;
+    height: 200px;
+    margin-top: 20px;
+}
+
+.aboutMeDiv mat-form-field textarea {
+    height: 150px;
+}
+
+.videoTag{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50vw, -50vh);
+    z-index: 5;
+}
+
+.bottomDiv {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tracksListDiv{
+    display: flex;
+}
+.videosListDiv{
+    display: flex;
+}
+.itemName{
+    margin-left: 10px;
+    width: 160px;
+}
+.tabGroup {
+    width: 90%;
+}
+
+.favourites {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.artistsList {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* .artistsList img {
+    margin: 10px;
+    border: 1px solid #dfdfdf;
+    border-radius: 15px;
+    height: 200px;
+    width: 160px;
+    object-fit: contain;
+} */
+
+.tracksList {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* 
+.tracksList img {
+    margin: 10px;
+    border: 1px solid #dfdfdf;
+    border-radius: 15px;
+    height: 200px;
+    width: 160px;
+    object-fit: contain;
+} */
+
+.mat-tab {
+    height: 575px;
+}
+
+.audioPlayer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #1f1f1f;
+    gap: 20px;
+    padding: 20px 0 0 0;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

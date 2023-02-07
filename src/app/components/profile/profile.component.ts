@@ -1,11 +1,12 @@
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
 import { UpdateDataService } from "../../services/update-data.service";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from "../dialog/dialog.component";
+import { MusicService } from 'src/app/services/music.service';
 
 @Component({
     selector: 'app-profile',
@@ -27,7 +28,8 @@ export class ProfileComponent {
         private dataService: DataService,
         private updateDataService: UpdateDataService,
         private router: Router,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private musicService: MusicService
     ) { }
 
     startVideo(video: HTMLImageElement) {
@@ -46,11 +48,15 @@ export class ProfileComponent {
     }
 
     changeTrack(track: HTMLImageElement) {
+        console.log(`previous:${this.track}`);
         this.track = track.id
-        console.log(this.track);
+        console.log(`current:${this.track}`);
+        this.musicService.changeData(this.track,0,false)
     }
 
-
+    // isPaused(player: HTMLAudioElement) {
+    //     return player.paused
+    // }
 
     onFileSelected(event: any, albumId: string) {
         const files: File[] = event.target.files;
@@ -129,6 +135,8 @@ export class ProfileComponent {
                     }
                 }
             })
+        this.musicService.music$
+            .subscribe(res => this.track = res.track)
     }
 
     openTrackDialog(item: { name: string, albumArt: string }) {
@@ -136,7 +144,7 @@ export class ProfileComponent {
         const dialogRef = this.dialog.open(DialogComponent, {
             data: {
                 title: nameStr,
-                videoflag:false,
+                videoflag: false,
                 item: item
             }
         });
@@ -151,7 +159,7 @@ export class ProfileComponent {
         const dialogRef = this.dialog.open(DialogComponent, {
             data: {
                 title: nameStr,
-                videoFlag:true,
+                videoFlag: true,
                 item: item
             }
         });

@@ -19,12 +19,10 @@ const userSchema = new Schema({
     },
     tracks: [{ name: String, albumArt: String, title: String }],
     videos: [{ name: String, thumbnail: String, title: String }],
-    contactRequests: [],
     eventBookings: [],
     favouriteTracks: [],
     favouriteArtists: [],
     favouriteVideos: [],
-    requestedContacts: [],
     bookedHistory: []
 }, { timestamps: true })
 

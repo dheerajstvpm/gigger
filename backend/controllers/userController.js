@@ -114,8 +114,8 @@ const profilePost = async (req, res) => {
     try {
         console.log(req.body);
         console.log(req.userId);
-        await User.findOneAndUpdate({ _id: req.body._id }, { $set: { 'blockStatus': req.body.blockStatus, 'name': req.body.name, 'aboutMe': req.body.aboutMe } });
-        const user = await User.findOne({ _id: req.userId }).select('-password');
+        await User.findOneAndUpdate({ _id: req.body._id }, { $set: { 'blockStatus': req.body.blockStatus, 'name': req.body.name, 'aboutMe': req.body.aboutMe, 'favouriteTracks':req.body.favouriteTracks } });
+        const user = await User.findOne({ _id: req.body._id }).select('-password');
         res.send(user)
     } catch (err) {
         console.log(err)

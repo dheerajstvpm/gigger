@@ -15,6 +15,7 @@ export class AuthService {
     // private tokenUrl = "http://localhost:3000/api/token"
 
     loginStatus: boolean = false
+    userType:string=''
 
     constructor(private http: HttpClient, private dataService: DataService, private router: Router) { }
 
@@ -24,7 +25,7 @@ export class AuthService {
     adminRoute() {
         return /^(\/admin).*/g.test(this.router.url);
     }
-    adminLoginRoute(){
+    adminLoginRoute() {
         return /^(\/loginAdmin)/g.test(this.router.url);
     }
     signupUser(user: User) {
@@ -43,7 +44,7 @@ export class AuthService {
         localStorage.removeItem('token')
         this.router.navigate(['/user/login'])
     }
-    adminLogin(user: {username:string, password:string}) {
+    adminLogin(user: { username: string, password: string }) {
         return this.http.post<{ token: string, loginError: string }>(this.adminLoginUrl, user)
     }
     adminLogout() {

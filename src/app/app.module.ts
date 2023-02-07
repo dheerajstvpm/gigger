@@ -23,6 +23,10 @@ import { PaymentDetailsComponent } from './adminComponents/payment-details/payme
 import { AdminLoginComponent } from './adminComponents/admin-login/admin-login.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { RemovePrefixPipe } from './pipes/remove-prefix.pipe';
+import { HomeComponent } from './components/home/home.component';
+import { DiscoverComponent } from './components/discover/discover.component';
+import { PopularComponent } from './components/popular/popular.component';
+import { OtherProfileComponent } from './components/other-profile/other-profile.component';
 
 
 @NgModule({
@@ -39,7 +43,11 @@ import { RemovePrefixPipe } from './pipes/remove-prefix.pipe';
     PaymentDetailsComponent,
     AdminLoginComponent,
     DialogComponent,
-    RemovePrefixPipe
+    RemovePrefixPipe,
+    HomeComponent,
+    DiscoverComponent,
+    PopularComponent,
+    OtherProfileComponent
   ],
   entryComponents:[DialogComponent],
   imports: [

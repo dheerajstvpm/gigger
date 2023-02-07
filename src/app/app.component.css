@@ -120,7 +120,7 @@ ul li {
     font-size: larger;
 }
 
-#adminRouteOutlet{
+#adminRouteOutlet {
     display: flex;
     flex-direction: column;
     margin-left: 25%;
@@ -131,14 +131,14 @@ ul li {
     color: #1f1f1f;
 }
 
-#adminRouteOutlet header{
+#adminRouteOutlet header {
     display: flex;
     justify-content: end;
-    margin:50px;
+    margin: 50px;
     font-size: xx-large;
 }
 
-#adminLoginRoute{
+#adminLoginRoute {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,4 +146,23 @@ ul li {
     height: 100vh;
     background-color: #efefef;
     color: #1f1f1f;
+}
+
+.roundButton {
+    background-color: #28A64B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 12px;
+    right: 20px;
+    z-index: 5;
+}
+
+.navigationDiv{
+    display: flex;
+    gap: 20px;
+}
+.navigationDiv a span{
+    font-size: medium;
 }

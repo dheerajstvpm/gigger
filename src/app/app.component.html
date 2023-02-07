@@ -10,6 +10,10 @@
                 </li>
             </ul>
         </div>
+        <div class="navigationDiv">
+            <a routerLink="/user/discover" id="logo"><span> Discover </span></a>
+            <a routerLink="/user/popular" id="logo"><span> Popular </span></a>
+        </div>
         <div class="loginDiv">
             <ul *ngIf="!auth.loggedIn()">
                 <li>
@@ -56,6 +60,13 @@
     <mat-toolbar id="userFooter">
         Get bigger with gigger
     </mat-toolbar>
+    <audio src="http://localhost:3000/tracks/{{track}}#t={{startTime}}" id="player" #player autoplay></audio>
+    <button class="roundButton" *ngIf="isPaused && track" mat-mini-fab (click)="playTrack(player)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="play_arrow"></mat-icon>
+    </button>
+    <button class="roundButton" *ngIf="!isPaused && track" mat-mini-fab (click)="pauseTrack(player)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="pause"></mat-icon>
+    </button>
 </div>
 
 <div *ngIf="auth.adminRoute()" id="adminRoute">
