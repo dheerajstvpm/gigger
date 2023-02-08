@@ -19,7 +19,7 @@ import { OtherProfileComponent } from './components/other-profile/other-profile.
 const routes: Routes = [
   {
     path: "user",
-    redirectTo: "/user/profile",
+    redirectTo: "/user/home",
     pathMatch: "full"
   },
   {

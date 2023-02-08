@@ -19,7 +19,6 @@ import { BehaviorSubject } from 'rxjs';
 export class PopularComponent {
 
     profile!: User;
-    likeToggle!: boolean
 
     constructor(
         private http: HttpClient,
@@ -39,6 +38,76 @@ export class PopularComponent {
         this.dataSource.paginator = this.paginator
     }
 
+    ngOnInit() {
+        this.dataService.getProfile()
+            .subscribe({
+                next: (res) => {
+                    console.log(`res:${res._id}`)
+                    this.profile = res
+                    this.dataService.getUsers()
+                        .subscribe({
+                            next: res2 => {
+                                console.log(`res2:${res2}`);
+                                let tracks: any
+                                tracks = res2.map(item => {
+                                    return item.tracks
+                                })
+                                tracks = tracks.flat()
+                                console.log(tracks);
+                                let favourites: any
+                                favourites = res2.map(item => {
+                                    return item.favouriteTracks
+                                })
+                                favourites = favourites.flat()
+                                console.log(favourites);
+                                let userFavourites: any;
+                                userFavourites = this.profile.favouriteTracks
+                                let out: any
+                                out = tracks.map((item: any) => {
+                                    let result = {
+                                        _id: item._id,
+                                        name: item.name,
+                                        image: item.albumArt,
+                                        likes: 0,
+                                        userLike: false
+                                    }
+                                    for (let one of favourites) {
+                                        if (item.name === one) {
+                                            result.likes++
+                                        }
+                                    }
+                                    for (let i of userFavourites) {
+                                        if (item.name === i) {
+                                            result.userLike = true
+                                        }
+                                    }
+                                    return result
+                                })
+                                console.log(out);
+                                this.dataSource.data = out
+                            },
+                            error: err => {
+                                if (err instanceof HttpErrorResponse) {
+                                    if (err.status === 401 || 500) {
+                                        console.log(`Error:${err}`)
+                                        this.router.navigate(['/loginAdmin'])
+                                    }
+                                }
+                            }
+                        })
+                },
+                error: (err) => {
+                    if (err instanceof HttpErrorResponse) {
+                        if (err.status === 401 || 500) {
+                            console.log(`Error:${err}`)
+                            this.router.navigate(['/user/login'])
+                        }
+                    }
+                }
+            })
+
+    }
+
     changeTrack(track: string) {
         this.musicService.changeData(track, 0, false)
     }
@@ -50,6 +119,57 @@ export class PopularComponent {
                 next: (res) => {
                     console.log(res);
                     this.profile = res
+                    this.dataService.getUsers()
+                        .subscribe({
+                            next: res2 => {
+                                console.log(`res2:${res2}`);
+                                let tracks: any
+                                tracks = res2.map(item => {
+                                    return item.tracks
+                                })
+                                tracks = tracks.flat()
+                                console.log(tracks);
+                                let favourites: any
+                                favourites = res2.map(item => {
+                                    return item.favouriteTracks
+                                })
+                                favourites = favourites.flat()
+                                console.log(favourites);
+                                let userFavourites: any;
+                                userFavourites = this.profile.favouriteTracks
+                                let out: any
+                                out = tracks.map((item: any) => {
+                                    let result = {
+                                        _id: item._id,
+                                        name: item.name,
+                                        image: item.albumArt,
+                                        likes: 0,
+                                        userLike: false
+                                    }
+                                    for (let one of favourites) {
+                                        if (item.name === one) {
+                                            result.likes++
+                                        }
+                                    }
+                                    for (let i of userFavourites) {
+                                        if (item.name === i) {
+                                            result.userLike = true
+                                        }
+                                    }
+                                    return result
+                                })
+                                console.log(out);
+                                this.dataSource.data = out
+                            },
+                            error: err => {
+                                if (err instanceof HttpErrorResponse) {
+                                    if (err.status === 401 || 500) {
+                                        console.log(`Error:${err}`)
+                                        this.router.navigate(['/loginAdmin'])
+                                    }
+                                }
+                            }
+                        })
                 },
                 error: (err) => {
                     console.log(err);
@@ -67,85 +187,65 @@ export class PopularComponent {
             .subscribe({
                 next: (res) => {
                     console.log(res);
-                    this.profile = res
+                    this.profile = res;
+                    this.dataService.getUsers()
+                        .subscribe({
+                            next: res2 => {
+                                console.log(`res2:${res2}`);
+                                let tracks: any
+                                tracks = res2.map(item => {
+                                    return item.tracks
+                                })
+                                tracks = tracks.flat()
+                                console.log(tracks);
+                                let favourites: any
+                                favourites = res2.map(item => {
+                                    return item.favouriteTracks
+                                })
+                                favourites = favourites.flat()
+                                console.log(favourites);
+                                let userFavourites: any;
+                                userFavourites = this.profile.favouriteTracks
+                                let out: any
+                                out = tracks.map((item: any) => {
+                                    let result = {
+                                        _id: item._id,
+                                        name: item.name,
+                                        image: item.albumArt,
+                                        likes: 0,
+                                        userLike: false
+                                    }
+                                    for (let one of favourites) {
+                                        if (item.name === one) {
+                                            result.likes++
+                                        }
+                                    }
+                                    for (let i of userFavourites) {
+                                        if (item.name === i) {
+                                            result.userLike = true
+                                        }
+                                    }
+                                    return result
+                                })
+                                console.log(out);
+                                this.dataSource.data = out
+                            },
+                            error: err => {
+                                if (err instanceof HttpErrorResponse) {
+                                    if (err.status === 401 || 500) {
+                                        console.log(`Error:${err}`)
+                                        this.router.navigate(['/loginAdmin'])
+                                    }
+                                }
+                            }
+                        })
                 },
                 error: (err) => {
                     console.log(err);
                 }
             })
     }
-    ngOnInit() {
-        this.dataService.getProfile()
-            .subscribe({
-                next: (res) => {
-                    console.log(`res:${res._id}`)
-                    this.profile = res
-                },
-                error: (err) => {
-                    if (err instanceof HttpErrorResponse) {
-                        if (err.status === 401 || 500) {
-                            console.log(`Error:${err}`)
-                            this.router.navigate(['/user/login'])
-                        }
-                    }
-                }
-            })
-        this.dataService.getUsers()
-            .subscribe({
-                next: res => {
-                    console.log(`res:${res}`);
-                    let artists: any
-                    artists = res.filter(item => {
-                        return item.artistFlag
-                    })
-                    let tracks: any
-                    tracks = res.map(item => {
-                        return item.tracks
-                    })
-                    tracks = tracks.flat()
-                    console.log(tracks);
-                    let favourites: any
-                    favourites = res.map(item => {
-                        return item.favouriteTracks
-                    })
-                    favourites = favourites.flat()
-                    console.log(favourites);
-                    let userFavourites: any;
-                    userFavourites = this.profile.favouriteTracks
-                    let out: any
-                    out = tracks.map((item: any) => {
-                        let result = {
-                            _id: item._id,
-                            name: item.name,
-                            image: item.albumArt,
-                            likes: 0,
-                            userLike: false
-                        }
-                        for (let one of favourites) {
-                            if (item._id === one) {
-                                result.likes++
-                            }
-                        }
-                        for (let i of userFavourites) {
-                            if (item.name === i) {
-                                result.userLike = true
-                            }
-                        }
-                        return result
-                    })
-                    console.log(out);
-                    this.dataSource.data = out
-                },
-                error: err => {
-                    if (err instanceof HttpErrorResponse) {
-                        if (err.status === 401 || 500) {
-                            console.log(`Error:${err}`)
-                            this.router.navigate(['/loginAdmin'])
-                        }
-                    }
-                }
-            })
-    }
+
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;

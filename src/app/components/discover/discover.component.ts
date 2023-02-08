@@ -15,12 +15,15 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./discover.component.css']
 })
 export class DiscoverComponent {
+
+    profile!: User;
+
     constructor(
         private dataService: DataService,
         private updateDataService: UpdateDataService,
         private router: Router
     ) { }
-    displayedColumns: string[] = ['_id', 'name', 'image', 'likes'];
+    displayedColumns: string[] = ['_id', 'name', 'image', 'likes', 'userLike'];
     dataSource = new MatTableDataSource<User>();
 
     @ViewChild(MatSort) sort!: MatSort;
@@ -30,51 +33,209 @@ export class DiscoverComponent {
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator
     }
+
+
     ngOnInit() {
-        this.dataService.getUsers()
+        this.dataService.getProfile()
             .subscribe({
-                next: res => {
-                    console.log(`res:${res}`);
-                    let artists: any
-                    artists = res.filter(item => {
-                        return item.artistFlag
-                    })
-                    let favourites: any
-                    favourites = res.map(item => {
-                        return item.favouriteArtists
-                    })
-                    favourites=favourites.flat()
-                    console.log(favourites);
-                    let out: any;
-                    out = artists.map((item: any) => {
-                        let result = {
-                            _id: item._id,
-                            name: item.name,
-                            image: item.profileImage,
-                            likes: 0
-                        }
-                        for (let one of favourites) {
-                            if (item._id === one) {
-                                result.likes++
+                next: (res) => {
+                    console.log(`res:${res._id}`)
+                    this.profile = res
+                    this.dataService.getUsers()
+                        .subscribe({
+                            next: res2 => {
+                                console.log(`res2:${res2}`);
+                                let artists: any
+                                artists = res2.filter(item => {
+                                    return item.artistFlag
+                                })
+                                let favourites: any
+                                favourites = res2.map(item => {
+                                    return item.favouriteArtists
+                                })
+                                favourites = favourites.flat()
+                                console.log(favourites);
+                                let userFavourites: any;
+                                userFavourites = this.profile.favouriteArtists
+                                let out: any;
+                                out = artists.map((item: any) => {
+                                    let result = {
+                                        _id: item._id,
+                                        name: item.name,
+                                        image: item.profileImage,
+                                        likes: 0,
+                                        userLike: false
+                                    }
+                                    for (let one of favourites) {
+                                        if (item._id === one) {
+                                            result.likes++
+                                        }
+                                    }
+                                    for (let i of userFavourites) {
+                                        if (item._id === i) {
+                                            result.userLike = true
+                                        }
+                                    }
+                                    return result
+                                })
+                                console.log(out);
+                                this.dataSource.data = out
+                            },
+                            error: err => {
+                                if (err instanceof HttpErrorResponse) {
+                                    if (err.status === 401 || 500) {
+                                        console.log(`Error:${err}`)
+                                        this.router.navigate(['/loginAdmin'])
+                                    }
+                                }
                             }
-                        }
-                        return result
-                    })
-                    console.log(out);
-                    this.dataSource.data = out
+                        })
                 },
-                error: err => {
+                error: (err) => {
                     if (err instanceof HttpErrorResponse) {
                         if (err.status === 401 || 500) {
                             console.log(`Error:${err}`)
-                            this.router.navigate(['/loginAdmin'])
+                            this.router.navigate(['/user/login'])
                         }
                     }
                 }
             })
+
     }
 
-    applyFilter(event: Event) {
+
+    addFavourite(artist: string) {
+        this.profile.favouriteArtists?.push(artist)
+        this.updateDataService.updateProfile(this.profile)
+            .subscribe({
+                next: (res) => {
+                    console.log(res);
+                    this.profile = res
+                    this.dataService.getUsers()
+                        .subscribe({
+                            next: res2 => {
+                                console.log(`res2:${res2}`);
+                                let artists: any
+                                artists = res2.filter(item => {
+                                    return item.artistFlag
+                                })
+                                let favourites: any
+                                favourites = res2.map(item => {
+                                    return item.favouriteArtists
+                                })
+                                favourites = favourites.flat()
+                                console.log(favourites);
+                                let userFavourites: any;
+                                userFavourites = this.profile.favouriteArtists
+                                let out: any;
+                                out = artists.map((item: any) => {
+                                    let result = {
+                                        _id: item._id,
+                                        name: item.name,
+                                        image: item.profileImage,
+                                        likes: 0,
+                                        userLike: false
+                                    }
+                                    for (let one of favourites) {
+                                        if (item._id === one) {
+                                            result.likes++
+                                        }
+                                    }
+                                    for (let i of userFavourites) {
+                                        if (item._id === i) {
+                                            result.userLike = true
+                                        }
+                                    }
+                                    return result
+                                })
+                                console.log(out);
+                                this.dataSource.data = out
+                            },
+                            error: err => {
+                                if (err instanceof HttpErrorResponse) {
+                                    if (err.status === 401 || 500) {
+                                        console.log(`Error:${err}`)
+                                        this.router.navigate(['/loginAdmin'])
+                                    }
+                                }
+                            }
+                        })
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+    }
+
+    removeFavourite(artist: string) {
+        let index: any
+        index = this.profile.favouriteArtists?.indexOf(artist);
+        if (index > -1) { // only splice array when item is found
+            this.profile.favouriteArtists?.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        this.updateDataService.updateProfile(this.profile)
+            .subscribe({
+                next: (res) => {
+                    console.log(res);
+                    this.profile = res
+                    this.dataService.getUsers()
+                        .subscribe({
+                            next: res2 => {
+                                console.log(`res2:${res2}`);
+                                let artists: any
+                                artists = res2.filter(item => {
+                                    return item.artistFlag
+                                })
+                                let favourites: any
+                                favourites = res2.map(item => {
+                                    return item.favouriteArtists
+                                })
+                                favourites = favourites.flat()
+                                console.log(favourites);
+                                let userFavourites: any;
+                                userFavourites = this.profile.favouriteArtists
+                                let out: any;
+                                out = artists.map((item: any) => {
+                                    let result = {
+                                        _id: item._id,
+                                        name: item.name,
+                                        image: item.profileImage,
+                                        likes: 0,
+                                        userLike: false
+                                    }
+                                    for (let one of favourites) {
+                                        if (item._id === one) {
+                                            result.likes++
+                                        }
+                                    }
+                                    for (let i of userFavourites) {
+                                        if (item._id === i) {
+                                            result.userLike = true
+                                        }
+                                    }
+                                    return result
+                                })
+                                console.log(out);
+                                this.dataSource.data = out
+                            },
+                            error: err => {
+                                if (err instanceof HttpErrorResponse) {
+                                    if (err.status === 401 || 500) {
+                                        console.log(`Error:${err}`)
+                                        this.router.navigate(['/loginAdmin'])
+                                    }
+                                }
+                            }
+                        })
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+
+    }
+
+    applyFilter(event: Event): void {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
 

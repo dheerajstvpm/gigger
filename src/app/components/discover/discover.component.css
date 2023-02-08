@@ -32,3 +32,12 @@ img {
     border: 1px solid #dfdfdf;
     object-fit: cover;
 }
+
+a{
+    text-decoration: none;
+    color: #efefef;
+}
+
+#liked{
+    color:indianred;
+}

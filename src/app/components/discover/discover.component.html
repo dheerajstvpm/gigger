@@ -40,6 +40,19 @@
                 <td mat-cell *matCellDef="let element"> {{element.likes}} </td>
             </ng-container>
 
+            <!-- Name Column -->
+            <ng-container matColumnDef="userLike">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> likeButton </th>
+                <td mat-cell *matCellDef="let element">
+                    <button *ngIf="element.userLike" mat-mini-fab (click)="removeFavourite(element._id)">
+                        <mat-icon id="liked" fontIcon="favorite"></mat-icon>
+                    </button>
+                    <button *ngIf="!element.userLike" mat-mini-fab (click)="addFavourite(element._id)">
+                        <mat-icon fontIcon="favorite"></mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             Row shown when there is no matching data.
