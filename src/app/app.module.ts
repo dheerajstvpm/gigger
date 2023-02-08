@@ -27,7 +27,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DiscoverComponent } from './components/discover/discover.component';
 import { PopularComponent } from './components/popular/popular.component';
 import { OtherProfileComponent } from './components/other-profile/other-profile.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ import { OtherProfileComponent } from './components/other-profile/other-profile.
     MaterialModule,
     HttpClientModule,
     DataTablesModule,
-  
+    ReactiveFormsModule,
   ],
   providers: [AuthService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,

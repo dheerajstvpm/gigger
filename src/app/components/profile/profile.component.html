@@ -136,8 +136,8 @@
                                 </button>
                                 <img *ngIf="item" src="http://localhost:3000/albumArt/{{item}}.jpg" id="item" #first
                                     (click)="changeTrack(first)">
-                                <img *ngIf="!item" src="http://localhost:3000/albumArt/stockAlbumArt.png" id="item" #first
-                                    (click)="changeTrack(first)">
+                                <img *ngIf="!item" src="http://localhost:3000/albumArt/stockAlbumArt.png" id="item"
+                                    #first (click)="changeTrack(first)">
                             </div>
                         </div>
                     </div>
@@ -154,6 +154,12 @@
         </div>
     </div>
 </div>
+
+<mat-card class="demo-inline-calendar-card">
+    <mat-calendar [(selected)]="selected" [dateFilter]="rangeFilter" [minDate]="minDate" (click)="selection()">
+    </mat-calendar>
+</mat-card>
+<p>{{selected}}</p>
 
 
 <!-- <audio src="http://localhost:3000/tracks/Ay Hairathe.mp3" controls autoplay>
