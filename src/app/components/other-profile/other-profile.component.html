@@ -71,6 +71,16 @@
 </div>
 
 
+<mat-card *ngIf="otherProfile.artistFlag" class="demo-inline-calendar-card">
+    <mat-card-header>
+        <mat-card-title>Select dates to book event</mat-card-title>
+    </mat-card-header>
+    <mat-calendar [(selected)]="selected" [dateFilter]="rangeFilter" [minDate]="minDate" (click)="selection()">
+    </mat-calendar>
+</mat-card>
+<p>{{selected}}</p>
+
+
 <!-- <audio src="http://localhost:3000/tracks/Ay Hairathe.mp3" controls autoplay>
     <p>If you are reading this, it is because your browser does not support the audio element.</p>
 </audio> -->

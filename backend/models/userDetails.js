@@ -9,8 +9,7 @@ const userSchema = new Schema({
     mobile: String,
     profileImage: String,
     aboutMe: String,
-    soloEventPricing: Number,
-    bandEventPricing: Number,
+    eventPricing: Number,
     blockStatus: { type: Boolean, default: false },
     artistFlag: { type: Boolean, default: false },
     images: {
@@ -19,7 +18,7 @@ const userSchema = new Schema({
     },
     tracks: [{ name: String, albumArt: String, title: String }],
     videos: [{ name: String, thumbnail: String, title: String }],
-    eventBookings: [],
+    eventBookings: [{ isBooking: Boolean, userId: String, artistId: String, bookingDate: Date, price: Number, isConfirmed: Boolean }],
     favouriteTracks: [],
     favouriteArtists: [],
     favouriteVideos: [],

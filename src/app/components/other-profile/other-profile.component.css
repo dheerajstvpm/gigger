@@ -235,4 +235,9 @@ button {
     align-items: center;
 }
 
-
+mat-card {
+    display: flex;
+    margin: 40px 5% 40px 5%;
+    justify-content: center;
+    width: 90%;
+}

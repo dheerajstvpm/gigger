@@ -6,12 +6,18 @@ export interface User {
     artistFlag?: boolean;
     blockStatus?: boolean;
     aboutMe?: string;
-    soloEventPricing?: Number,
-    bandEventPricing?: Number,
+    eventPricing?: number,
     profileImage?: string;
     tracks?: [{ name: string, albumArt: string }];
     videos?: [{ name: string, thumbnail: string }];
-    eventBookings?: [];
+    eventBookings?: [{
+        isBooking: boolean,
+        userId?: string,
+        artistId?: string,
+        bookingDate: Date|null,
+        price?: number,
+        isConfirmed: boolean
+    }];
     favouriteTracks?: [string];
     favouriteArtists?: [string];
     favouriteVideos?: [string];

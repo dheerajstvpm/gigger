@@ -155,33 +155,13 @@
     </div>
 </div>
 
-<mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selected" [dateFilter]="rangeFilter" [minDate]="minDate" (click)="selection()">
+<mat-card *ngIf="profile.artistFlag" class="demo-inline-calendar-card">
+    <mat-card-header>
+        <mat-card-title>Select unavailable dates</mat-card-title>
+    </mat-card-header>
+    <mat-calendar [(selected)]="selected" [dateFilter]="rangeFilter" [minDate]="minDate">
     </mat-calendar>
 </mat-card>
+
+<button mat-raised-button (click)="submitDate()">Submit</button>
 <p>{{selected}}</p>
-
-
-<!-- <audio src="http://localhost:3000/tracks/Ay Hairathe.mp3" controls autoplay>
-    <p>If you are reading this, it is because your browser does not support the audio element.</p>
-</audio> -->
-
-<!-- <audio src="http://localhost:3000/tracks/{{track}}.mp3" controls autoplay>
-    <p>If you are reading this, it is because your browser does not support the audio element.</p>
-</audio> -->
-
-<!-- <audio src="http://localhost:3000/tracks/{{track}}" id="player" #player autoplay></audio>
-<div class="audioPlayer">
-    <button *ngIf="isPaused(player)" mat-raised-button onclick="document.getElementById('player').play()">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="play_arrow"></mat-icon>
-    </button>
-    <button *ngIf="!isPaused(player)" mat-raised-button onclick="document.getElementById('player').pause()">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="pause"></mat-icon>
-    </button>
-    <button mat-raised-button onclick="document.getElementById('player').volume += 0.1">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="volume_up"></mat-icon>
-    </button>
-    <button mat-raised-button onclick="document.getElementById('player').volume -= 0.1">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="volume_down"></mat-icon>
-    </button>
-</div> -->

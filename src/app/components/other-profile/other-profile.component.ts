@@ -73,4 +73,18 @@ export class OtherProfileComponent {
                 }
             })
     }
+
+    title = 'angular-datepicker';
+    selected!: Date | null;
+
+    minDate = new Date()
+
+    rangeFilter(date: Date): boolean {
+        const strDate="2023-02-08T04:04:45.094Z";
+        return date.toISOString().substring(0, 10) >= strDate.substring(0, 10);
+    }
+
+    selection(){
+        console.log(this.selected);
+    }
 }

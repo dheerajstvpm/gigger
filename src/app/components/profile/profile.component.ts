@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
+import { Booking } from "../../models/booking";
 import { UpdateDataService } from "../../services/update-data.service";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from "../dialog/dialog.component";
@@ -51,7 +52,7 @@ export class ProfileComponent {
         console.log(`previous:${this.track}`);
         this.track = track.id
         console.log(`current:${this.track}`);
-        this.musicService.changeData(this.track,0,false)
+        this.musicService.changeData(this.track, 0, false)
     }
 
     // isPaused(player: HTMLAudioElement) {
@@ -175,11 +176,41 @@ export class ProfileComponent {
     minDate = new Date()
 
     rangeFilter(date: Date): boolean {
-        const strDate="2023-02-08T04:04:45.094Z";
-        return date.toISOString().substring(0, 10) >= strDate.substring(0, 10);
+        const strDate = "2023-02-15T04:04:45.094Z";
+        const d1=new Date()
+        const d2=new Date(this.selected)
+        console.log(d1);
+        console.log(date.getTime());
+        console.log(d1.getTime() === d2.getTime())
+        return date != new Date()
     }
 
-    selection(){
+    submitDate() {
         console.log(this.selected);
+        let user = this.profile
+        const eventBooking = {
+            isBooking: false,
+            userId: user._id,
+            artistId: user._id,
+            bookingDate: this.selected,
+            price: user.eventPricing,
+            isConfirmed: false,
+        }
+        user.eventBookings?.push(eventBooking)
+        this.updateDataService.updateProfile(user)
+            .subscribe({
+                next: (res) => {
+                    console.log(`res:${res._id}`)
+                    this.profile = res
+                },
+                error: (err) => {
+                    if (err instanceof HttpErrorResponse) {
+                        if (err.status === 401 || 500) {
+                            console.log(`Error:${err}`)
+                            this.router.navigate(['/user/login'])
+                        }
+                    }
+                }
+            })
     }
 }

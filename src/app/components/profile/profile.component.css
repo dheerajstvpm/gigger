@@ -1,4 +1,4 @@
-.roundButton{
+.roundButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,10 +8,13 @@
     margin-top: 20px;
     margin-right: 20px;
     float: right;
+    z-index: 5;
 }
+
 #editButton {
     background-color: #e91e63;
 }
+
 #submitEdit {
     background-color: #28A64B;
 }
@@ -36,34 +39,42 @@
     margin: 20px 0 20px 40px;
 }
 
-.imageDiv{
+.imageDiv {
     position: relative;
 }
-.imageDiv img{
+
+.imageDiv img {
     margin: 0;
     object-fit: cover;
 }
+
 .image-input {
     display: none;
 }
+
 .track-input {
     display: none;
 }
+
 .albumArt-input {
     display: none;
 }
+
 .video-input {
     display: none;
 }
+
 .thumbnail-input {
     display: none;
 }
+
 .file-upload {
     display: flex;
     flex-direction: column;
+    margin-top: -10px;
 }
 
-.file-upload div{
+.file-upload div {
     height: 200px;
     width: 160px;
     border-radius: 15px;
@@ -86,12 +97,12 @@
     /* position: absolute; */
 }
 
-.contentDiv{
+.contentDiv {
     margin: 20px 0 20px 20px;
 }
 
-.addIcon{
-    transform:scale(5);
+.addIcon {
+    transform: scale(5);
     color: #dfdfdf;
 }
 
@@ -104,7 +115,7 @@ img {
     object-fit: cover;
 }
 
-.thumbnail{
+.thumbnail {
     margin: 10px;
     height: 200px;
     width: 360px;
@@ -149,7 +160,7 @@ img {
     height: 150px;
 }
 
-.videoTag{
+.videoTag {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -164,16 +175,19 @@ img {
     justify-content: space-evenly;
 }
 
-.tracksListDiv{
+.tracksListDiv {
     display: flex;
 }
-.videosListDiv{
+
+.videosListDiv {
     display: flex;
 }
-.itemName{
+
+.itemName {
     margin-left: 10px;
     width: 160px;
 }
+
 .tabGroup {
     width: 90%;
 }
@@ -235,4 +249,9 @@ button {
     align-items: center;
 }
 
-
+mat-card {
+    display: flex;
+    margin: 40px 5% 40px 5%;
+    justify-content: center;
+    width: 90%;
+}

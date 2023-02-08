@@ -1,8 +1,8 @@
 export interface Booking{
-    type: string;
+    isBooking: boolean;
     userId: string;
     artistId: string;
     bookingDate: Date;
     price: number;
-    bookingStatus: boolean;
+    isConfirmed: boolean;
 }
