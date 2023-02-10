@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
@@ -8,6 +8,9 @@ import { UpdateDataService } from "../../services/update-data.service";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from "../dialog/dialog.component";
 import { MusicService } from 'src/app/services/music.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     selector: 'app-profile',
@@ -124,8 +127,11 @@ export class ProfileComponent {
         this.dataService.getProfile()
             .subscribe({
                 next: (res) => {
-                    console.log(`res:${res._id}`)
+                    console.log(res.eventBookings)
+                    let bookings: any
+                    bookings = res.eventBookings
                     this.profile = res
+                    this.dataSource.data = bookings
                 },
                 error: (err) => {
                     if (err instanceof HttpErrorResponse) {
@@ -171,46 +177,24 @@ export class ProfileComponent {
     }
 
     title = 'angular-datepicker';
-    selected!: Date | null;
 
-    minDate = new Date()
+    displayedColumns: string[] = ['_id', 'userId', 'artistId', 'payment', 'bookingDate', 'isConfirmed'];
+    dataSource = new MatTableDataSource<User>();
 
-    rangeFilter(date: Date): boolean {
-        const strDate = "2023-02-15T04:04:45.094Z";
-        const d1=new Date()
-        const d2=new Date(this.selected)
-        console.log(d1);
-        console.log(date.getTime());
-        console.log(d1.getTime() === d2.getTime())
-        return date != new Date()
+    @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+    ngAfterViewInit() {
+        this.dataSource.sort = this.sort
+        this.dataSource.paginator = this.paginator
     }
 
-    submitDate() {
-        console.log(this.selected);
-        let user = this.profile
-        const eventBooking = {
-            isBooking: false,
-            userId: user._id,
-            artistId: user._id,
-            bookingDate: this.selected,
-            price: user.eventPricing,
-            isConfirmed: false,
+    applyFilter(event: Event): void {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
         }
-        user.eventBookings?.push(eventBooking)
-        this.updateDataService.updateProfile(user)
-            .subscribe({
-                next: (res) => {
-                    console.log(`res:${res._id}`)
-                    this.profile = res
-                },
-                error: (err) => {
-                    if (err instanceof HttpErrorResponse) {
-                        if (err.status === 401 || 500) {
-                            console.log(`Error:${err}`)
-                            this.router.navigate(['/user/login'])
-                        }
-                    }
-                }
-            })
     }
 }

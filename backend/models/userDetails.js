@@ -18,7 +18,7 @@ const userSchema = new Schema({
     },
     tracks: [{ name: String, albumArt: String, title: String }],
     videos: [{ name: String, thumbnail: String, title: String }],
-    eventBookings: [{ isBooking: Boolean, userId: String, artistId: String, bookingDate: Date, price: Number, isConfirmed: Boolean }],
+    eventBookings: [{ userId: String, artistId: String, bookingDate: String, payment: Number, isConfirmed: Boolean }],
     favouriteTracks: [],
     favouriteArtists: [],
     favouriteVideos: [],

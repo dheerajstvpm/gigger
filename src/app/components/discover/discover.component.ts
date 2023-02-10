@@ -34,7 +34,6 @@ export class DiscoverComponent {
         this.dataSource.paginator = this.paginator
     }
 
-
     ngOnInit() {
         this.dataService.getProfile()
             .subscribe({
@@ -78,7 +77,7 @@ export class DiscoverComponent {
                                     }
                                     return result
                                 })
-                                console.log(out);
+                                console.log("out"+out);
                                 this.dataSource.data = out
                             },
                             error: err => {

@@ -16,8 +16,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 
-
-
 const MaterialComponents = [
   MatButtonModule,
   MatButtonToggleModule,

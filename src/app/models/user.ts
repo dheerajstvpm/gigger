@@ -11,10 +11,9 @@ export interface User {
     tracks?: [{ name: string, albumArt: string }];
     videos?: [{ name: string, thumbnail: string }];
     eventBookings?: [{
-        isBooking: boolean,
         userId?: string,
         artistId?: string,
-        bookingDate: Date|null,
+        bookingDate?: string,
         price?: number,
         isConfirmed: boolean
     }];

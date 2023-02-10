@@ -3,89 +3,82 @@
 <p *ngIf="!otherProfile.artistFlag">Profile of User {{profile|json}}</p>
 <p *ngIf="otherProfile.artistFlag">Profile of Artist {{profile|json}}</p> -->
 
+<div class="container">
 
-<div class="profileDiv">
-    <div class="topDiv">
-        <div class="imageDiv">
-            <div class="file-upload">
-                <div class="imgA1">
-                    <img *ngIf='otherProfile.profileImage' src="http://localhost:3000/images/{{otherProfile.profileImage}}"
-                        alt="profile">
-                    <img *ngIf='!otherProfile.profileImage'
-                        src="http://localhost:3000/images/stockProfileImage.jpg"
-                        alt="profile placeholder">
+    <div class="profileDiv">
+        <div class="topDiv">
+            <div class="imageDiv">
+                <div class="file-upload">
+                    <div class="imgA1">
+                        <img *ngIf='otherProfile.profileImage'
+                            src="http://localhost:3000/images/{{otherProfile.profileImage}}" alt="profile">
+                        <img *ngIf='!otherProfile.profileImage' src="http://localhost:3000/images/stockProfileImage.jpg"
+                            alt="profile placeholder">
+                    </div>
+                </div>
+            </div>
+            <div class="detailsDiv">
+                <div>Personal details</div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput value="{{otherProfile.name}}" disabled>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput value="{{otherProfile.username}}" disabled>
+                </mat-form-field>
+            </div>
+            <div class="aboutMeDiv">
+                <div>About Me</div>
+                <mat-form-field class="example-full-width">
+                    <textarea matInput value="{{otherProfile.aboutMe}}" disabled></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div *ngIf="otherProfile.artistFlag" class="addContent">
+            <div>Tracks</div>
+            <div class="tracksListDiv">
+                <div class="itemDiv" *ngFor="let item of otherProfile.tracks">
+                    <img *ngIf="item.albumArt" src="http://localhost:3000/albumArt/{{item.albumArt}}" id="{{item.name}}"
+                        #track (click)="changeTrack(track)">
+                    <img *ngIf="!item.albumArt" src="http://localhost:3000/albumArt/stockAlbumArt.png"
+                        id="{{item.name}}" #track (click)="changeTrack(track)">
+                    <div class="itemName">{{item.name|removePrefix}}</div>
                 </div>
             </div>
         </div>
-        <div class="detailsDiv">
-            <div>Personal details</div>
-            <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
-                <input matInput value="{{otherProfile.name}}" disabled>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput value="{{otherProfile.username}}" disabled>
-            </mat-form-field>
-        </div>
-        <div class="aboutMeDiv">
-            <div>About Me</div>
-            <mat-form-field class="example-full-width">
-                <textarea matInput value="{{otherProfile.aboutMe}}" disabled></textarea>
-            </mat-form-field>
-        </div>
-    </div>
-    <div *ngIf="otherProfile.artistFlag" class="addContent">
-        <div>Tracks</div>
-        <div class="tracksListDiv">
-            <div class="itemDiv" *ngFor="let item of otherProfile.tracks">
-                <img *ngIf="item.albumArt" src="http://localhost:3000/albumArt/{{item.albumArt}}"
-                    id="{{item.name}}" #track (click)="changeTrack(track)">
-                <img *ngIf="!item.albumArt"
-                    src="http://localhost:3000/albumArt/stockAlbumArt.png" id="{{item.name}}" #track
-                    (click)="changeTrack(track)">
-                <div class="itemName">{{item.name|removePrefix}}</div>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="otherProfile.artistFlag" class="addContent">
-        <div>Videos</div>
-        <div class="videosListDiv">
-            <div class="itemDiv" *ngFor="let item of otherProfile.videos">
-                <img *ngIf="item.thumbnail" onclick="document.getElementById('player').pause()"
-                    src="http://localhost:3000/thumbnail/{{item.thumbnail}}" id="{{item.name}}" #video
-                    (click)="startVideo(video)" class="thumbnail">
-                <img *ngIf="!item.thumbnail" src="http://localhost:3000/thumbnail/stockThumbnail.jpeg"
-                    id="{{item.name}}" #video (click)="startVideo(video)" class="thumbnail">
-                <div *ngIf="videoOn" class="videoTag">
-                    <video *ngIf="videoOn" width="100%" height="100%" controls (click)="stopVideo(videoPlayer)"
-                        #videoPlayer>
-                        <source src="http://localhost:3000/videos/{{video}}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+        <div *ngIf="otherProfile.artistFlag" class="addContent">
+            <div>Videos</div>
+            <div class="videosListDiv">
+                <div class="itemDiv" *ngFor="let item of otherProfile.videos">
+                    <img *ngIf="item.thumbnail" onclick="document.getElementById('player').pause()"
+                        src="http://localhost:3000/thumbnail/{{item.thumbnail}}" id="{{item.name}}" #video
+                        (click)="startVideo(video)" class="thumbnail">
+                    <img *ngIf="!item.thumbnail" src="http://localhost:3000/thumbnail/stockThumbnail.jpeg"
+                        id="{{item.name}}" #video (click)="startVideo(video)" class="thumbnail">
+                    <div *ngIf="videoOn" class="videoTag">
+                        <video *ngIf="videoOn" width="100%" height="100%" controls (click)="stopVideo(videoPlayer)"
+                            #videoPlayer>
+                            <source src="http://localhost:3000/videos/{{video}}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="itemName">{{item.name|removePrefix}}</div>
                 </div>
-                <div class="itemName">{{item.name|removePrefix}}</div>
             </div>
         </div>
     </div>
+
+    <mat-card *ngIf="otherProfile.artistFlag" class="demo-inline-calendar-card">
+        <mat-card-header>
+            <mat-card-title>Book events</mat-card-title>
+        </mat-card-header>
+        <mat-calendar [(selected)]="selected" [dateFilter]="myFilter" [minDate]="minDate">
+        </mat-calendar>
+    </mat-card>
+
+    <div class="submitDiv">
+        <button mat-raised-button (click)="submitDate()">Submit</button>
+    </div>
+
 </div>
-
-
-<mat-card *ngIf="otherProfile.artistFlag" class="demo-inline-calendar-card">
-    <mat-card-header>
-        <mat-card-title>Select dates to book event</mat-card-title>
-    </mat-card-header>
-    <mat-calendar [(selected)]="selected" [dateFilter]="rangeFilter" [minDate]="minDate" (click)="selection()">
-    </mat-calendar>
-</mat-card>
-<p>{{selected}}</p>
-
-
-<!-- <audio src="http://localhost:3000/tracks/Ay Hairathe.mp3" controls autoplay>
-    <p>If you are reading this, it is because your browser does not support the audio element.</p>
-</audio> -->
-
-<!-- <audio src="http://localhost:3000/tracks/{{track}}.mp3" controls autoplay>
-    <p>If you are reading this, it is because your browser does not support the audio element.</p>
-</audio> -->
-
