@@ -1,1 +1,38 @@
-<p>home works!</p>
+<div class="container">
+    <div class="imgDiv">
+        <img src="http://localhost:3000/images/homepage_top_image.jpg" class="siteImages" id="topImages"
+            alt="homepage_top_image">
+        <div class="topCentered">Get bigger with gigger</div>
+    </div>
+    <div class="middleDiv">
+        <h1>Featured artists</h1>
+        <div class="featured">
+            <div *ngFor="let item of profile" class="cardList">
+                <mat-card class="artist-card">
+                    <mat-card-header>
+                        <mat-card-title>{{item.name}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="http://localhost:3000/images/{{item.profileImage}}" alt="Artist_image">
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="middleDiv">
+        <h1>Featured tracks</h1>
+        <div class="featured">
+            <div *ngFor="let item of profile" class="cardList">
+                <mat-card class="track-card">
+                    <mat-card-header>
+                        <mat-card-title>{{item.name}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="http://localhost:3000/images/{{item.profileImage}}" alt="Artist_image">
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="imgDiv">
+        <img src="http://localhost:3000/images/homepage_bottom_image.jpg" class="siteImages" id="bottomImages"
+            alt="homepage_bottom_image">
+        <div class="topCentered">Connecting artists with their fanbase</div>
+    </div>
+</div>

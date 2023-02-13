@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: String,
     password: String,
     mobile: String,
-    profileImage: String,
+    profileImage: { type: String, default: "stockProfileImage.jpg" },
     aboutMe: String,
     eventPricing: Number,
     blockStatus: { type: Boolean, default: false },
