@@ -8,24 +8,26 @@
         <h1>Featured artists</h1>
         <div class="featured">
             <div *ngFor="let item of profile" class="cardList">
-                <mat-card class="artist-card">
-                    <mat-card-header>
-                        <mat-card-title>{{item.name}}</mat-card-title>
-                    </mat-card-header>
-                    <img mat-card-image src="http://localhost:3000/images/{{item.profileImage}}" alt="Artist_image">
-                </mat-card>
+                <a routerLink="../../user/otherProfile/{{item._id}}">
+                    <mat-card class="artist-card">
+                        <mat-card-header>
+                            <mat-card-title>{{item.name}}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image src="http://localhost:3000/images/{{item.profileImage}}" alt="Artist_image">
+                    </mat-card>
+                </a>
             </div>
         </div>
     </div>
-    <div class="middleDiv">
+    <div class="middleDiv tracklist">
         <h1>Featured tracks</h1>
         <div class="featured">
-            <div *ngFor="let item of profile" class="cardList">
-                <mat-card class="track-card">
+            <div *ngFor="let item of trackList" class="cardList">
+                <mat-card class="track-card" (click)="changeTrack(item.name)">
                     <mat-card-header>
-                        <mat-card-title>{{item.name}}</mat-card-title>
+                        <mat-card-title>{{item.name|removePrefix}}</mat-card-title>
                     </mat-card-header>
-                    <img mat-card-image src="http://localhost:3000/images/{{item.profileImage}}" alt="Artist_image">
+                    <img mat-card-image src="http://localhost:3000/albumArt/{{item.image}}" alt="Artist_image">
                 </mat-card>
             </div>
         </div>

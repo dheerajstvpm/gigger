@@ -23,12 +23,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px 0 40px 0;
+    padding: 40px 0 40px 0;
 }
 
 .featured {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.tracklist{
+    background-color: #1f1f1f;
 }
 
 .cardList {
@@ -36,10 +41,15 @@
     justify-content: space-between;
 }
 
+.cardList a {
+    text-decoration: none;
+    color: #dfdfdf;
+}
+
 .artist-card {
     width: 300px;
     height: 400px;
-    margin-left: 40px;
+    margin: 20px 0 0 40px;
     background-color: #1f1f1f;
 }
 
@@ -55,8 +65,8 @@
 .track-card {
     width: 200px;
     height: 300px;
-    margin-left: 40px;
-    background-color: #1f1f1f;
+    margin: 20px 0 0 40px;
+    background-color: #3f3f3f;
 }
 
 .track-card img {
@@ -66,4 +76,11 @@
     border-radius: 15px;
     border: 1px solid #dfdfdf;
     object-fit: cover;
+}
+
+mat-card-title {
+    white-space: nowrap;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

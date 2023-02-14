@@ -66,7 +66,7 @@ export class OtherProfileComponent {
                             const confirmedBookings: any = this.otherProfile.eventBookings?.filter((item) => {
                                 return item.isConfirmed
                             })
-                            this.bookedDates = confirmedBookings.map((item: any) => {
+                            this.bookedDates = this.otherProfile.eventBookings?.map((item: any) => {
                                 return item.bookingDate
                             })
                             console.log(this.bookedDates);

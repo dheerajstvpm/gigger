@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { DataService } from "../../services/data.service";
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { MusicService } from "src/app/services/music.service";
 
 @Component({
     selector: 'app-home',
@@ -12,18 +13,61 @@ import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 export class HomeComponent {
 
     profile!: User[];
+    trackList!: {
+        _id: '';
+        name: '';
+        image: '';
+        likes: 0;
+    }[];
 
     constructor(
         private dataService: DataService,
-        private router: Router
-    ) {}
+        private router: Router,
+        private musicService: MusicService
+    ) { }
 
     ngOnInit() {
         this.dataService.getUsers()
             .subscribe({
                 next: res => {
                     console.log(`res:${res}`);
-                    this.profile = res
+                    const artists = res.filter(item => {
+                        return item.artistFlag
+                    })
+                    this.profile = artists
+
+                    let tracks: any
+                    tracks = res.map(item => {
+                        return item.tracks
+                    })
+                    tracks = tracks.flat()
+                    console.log(tracks);
+                    let favouriteTracks: any
+                    favouriteTracks = res.map(item => {
+                        return item.favouriteTracks
+                    })
+                    favouriteTracks = favouriteTracks.flat()
+                    console.log(favouriteTracks);
+                    let trackList: any
+                    trackList = tracks.map((item: any) => {
+                        let result = {
+                            _id: item._id,
+                            name: item.name,
+                            image: item.albumArt,
+                            likes: 0
+                        }
+                        for (let one of favouriteTracks) {
+                            if (item.name === one) {
+                                result.likes++
+                            }
+                        }
+                        return result
+                    })
+                    console.log(trackList)
+                    trackList=trackList.sort(function (a: any, b: any) { a.likes - b.likes })
+                    console.log(trackList)
+                    this.trackList = trackList
+                    console.log(this.trackList)
                 },
                 error: err => {
                     if (err instanceof HttpErrorResponse) {
@@ -34,5 +78,9 @@ export class HomeComponent {
                     }
                 }
             })
+    }
+
+    changeTrack(track: string) {
+        this.musicService.changeData(track, 0, false)
     }
 }
