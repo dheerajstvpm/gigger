@@ -43,6 +43,3 @@ Thumbs.db
 #env
 .env
 
-#public
-/backend/public
-/node_modules
