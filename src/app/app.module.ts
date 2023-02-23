@@ -29,6 +29,7 @@ import { PopularComponent } from './components/popular/popular.component';
 import { OtherProfileComponent } from './components/other-profile/other-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserFromIdPipe } from './pipes/user-from-id.pipe';
+import { BookingDialogComponent } from './components/booking-dialog/booking-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { UserFromIdPipe } from './pipes/user-from-id.pipe';
     DiscoverComponent,
     PopularComponent,
     OtherProfileComponent,
-    UserFromIdPipe
+    UserFromIdPipe,
+    BookingDialogComponent
   ],
   entryComponents:[DialogComponent],
   imports: [

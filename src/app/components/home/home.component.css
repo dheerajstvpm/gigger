@@ -32,7 +32,7 @@
     flex-wrap: wrap;
 }
 
-.tracklist{
+.eventList{
     background-color: #1f1f1f;
 }
 
@@ -51,12 +51,15 @@
     height: 400px;
     margin: 20px 0 0 40px;
     background-color: #1f1f1f;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
 }
 
 .artist-card img {
     margin: 10px;
     height: 320px;
-    width: 280px;
+    width: 240px;
     border-radius: 15px;
     border: 1px solid #dfdfdf;
     object-fit: cover;
@@ -67,12 +70,15 @@
     height: 300px;
     margin: 20px 0 0 40px;
     background-color: #3f3f3f;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
 }
 
 .track-card img {
     margin: 10px;
     height: 220px;
-    width: 180px;
+    width: 160px;
     border-radius: 15px;
     border: 1px solid #dfdfdf;
     object-fit: cover;

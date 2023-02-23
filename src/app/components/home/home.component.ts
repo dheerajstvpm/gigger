@@ -19,11 +19,18 @@ export class HomeComponent {
         image: '';
         likes: 0;
     }[];
+    allEvents!: {
+        userId: string,
+        artistId: string,
+        bookingDate: string,
+        payment: number,
+        isConfirmed: boolean
+    }
 
     constructor(
         private dataService: DataService,
         private router: Router,
-        private musicService: MusicService
+        private musicService: MusicService,
     ) { }
 
     ngOnInit() {
@@ -35,6 +42,20 @@ export class HomeComponent {
                         return item.artistFlag
                     })
                     this.profile = artists
+
+                    let events: any
+                    events = res.map(item => {
+                        return item.eventBookings
+                    })
+                    events = events.flat()
+                    let allEvents: any
+                    allEvents = events.filter((item: { isConfirmed: any; }) => {
+                        return item.isConfirmed
+                    })
+                    allEvents = allEvents.flat()
+                    this.allEvents = allEvents
+                    console.log(this.allEvents);
+
 
                     let tracks: any
                     tracks = res.map(item => {
@@ -64,7 +85,7 @@ export class HomeComponent {
                         return result
                     })
                     console.log(trackList)
-                    trackList=trackList.sort(function (a: any, b: any) { a.likes - b.likes })
+                    trackList = trackList.sort(function (a: any, b: any) { a.likes - b.likes })
                     console.log(trackList)
                     this.trackList = trackList
                     console.log(this.trackList)
@@ -80,7 +101,10 @@ export class HomeComponent {
             })
     }
 
+
+
     changeTrack(track: string) {
         this.musicService.changeData(track, 0, false)
     }
+
 }

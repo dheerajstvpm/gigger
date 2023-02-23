@@ -3,7 +3,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { User } from "../../models/user";
 import { DataService } from "../../services/data.service";
-import { Data } from '@angular/router';
 
 @Component({
     selector: 'app-dialog',

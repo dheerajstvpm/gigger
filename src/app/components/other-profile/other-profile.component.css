@@ -232,3 +232,66 @@ mat-card {
     display: flex;
     justify-content: end;
 }
+
+
+
+
+
+
+.chatWindow{
+    z-index: 6;
+}
+.chatDiv {
+    width: 220px;
+    height: 400px;
+    border-radius: 15px;
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    background-color:#1f1f1f;
+}
+.chatHeader{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+#messageDiv {
+    overflow-y: auto;
+    height: 250px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#chatButton {
+    position: fixed;
+    bottom: 45px;
+    right: 25px;
+}
+
+#sendButton {
+    position: fixed;
+    bottom: 45px;
+    right: 165px;
+}
+
+#messageInput {
+    position: fixed;
+    bottom: 65px;
+    right: 25px;
+}
+
+#usersDiv {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#usersDiv input {
+    width: 95px;
+    margin: 10px 0 0 10px;
+}
+
+#receiverDiv {
+    display: flex;
+    justify-content: end;
+}

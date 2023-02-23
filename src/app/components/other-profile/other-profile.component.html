@@ -82,3 +82,29 @@
     </div>
 
 </div>
+<div class="chatWindow">
+    <div class="chatDiv" *ngIf="chatWindow">
+        <div class="chatHeader">
+            <span>{{receiver}}</span>
+            <mat-icon (click)="leave()" fontIcon="close"></mat-icon>
+        </div>
+        <div id="messageDiv">
+            <div>
+                <div *ngFor="let item of messageArray">
+                    <div id="receiverDiv" *ngIf="sender===item.sender"><span>{{item.message}}</span></div>
+                    <div id="senderDiv" *ngIf="sender!==item.sender"><span>{{item.message}}</span></div>
+                </div>
+            </div>
+        </div>
+        <mat-form-field id="messageInput" appearance="fill">
+            <mat-label>Type your message here</mat-label>
+            <input matInput (keydown.enter)='send()' type="text" name="message" [(ngModel)]="message">
+        </mat-form-field>
+        <button id="sendButton" mat-raised-button (click)="send()" [disabled]="!chatWindow">Send</button>
+    </div>
+    <button mat-mini-fab (click)="join()" id="chatButton"><mat-icon fontIcon="chat"></mat-icon></button>
+    <!-- <div id="usersDiv">
+        <input type="text" placeholder="sender id" [(ngModel)]="sender" name="sender">
+        <input type="text" placeholder="receiver id" [(ngModel)]="receiver" name="receiver">
+    </div> -->
+</div>

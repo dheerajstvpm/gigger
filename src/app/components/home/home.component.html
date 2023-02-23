@@ -7,7 +7,7 @@
     <div class="middleDiv">
         <h1>Featured artists</h1>
         <div class="featured">
-            <div *ngFor="let item of profile" class="cardList">
+            <div *ngFor="let item of profile| slice:0:4;" class="cardList">
                 <a routerLink="../../user/otherProfile/{{item._id}}">
                     <mat-card class="artist-card">
                         <mat-card-header>
@@ -19,10 +19,23 @@
             </div>
         </div>
     </div>
+    <div class="middleDiv eventList">
+        <h1>Upcoming events</h1>
+        <div class="featured">
+            <!-- <div *ngFor="let item of allEvents| slice:0:4;" class="cardList">
+                <mat-card class="event-card">
+                    <mat-card-header>
+                        <mat-card-title>{{item._id}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image src="http://localhost:3000/images/{{item.profileImage}}" alt="Artist_image">
+                </mat-card>
+            </div> -->
+        </div>
+    </div>
     <div class="middleDiv tracklist">
         <h1>Featured tracks</h1>
         <div class="featured">
-            <div *ngFor="let item of trackList" class="cardList">
+            <div *ngFor="let item of trackList| slice:0:8;" class="cardList">
                 <mat-card class="track-card" (click)="changeTrack(item.name)">
                     <mat-card-header>
                         <mat-card-title>{{item.name|removePrefix}}</mat-card-title>

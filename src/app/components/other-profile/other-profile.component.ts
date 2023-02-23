@@ -5,6 +5,10 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { User } from "../../models/user";
 import { MusicService } from 'src/app/services/music.service';
 import { UpdateDataService } from "../../services/update-data.service";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from "../dialog/dialog.component";
+import { BookingDialogComponent } from "../booking-dialog/booking-dialog.component";
+import { ChatService } from "../../services/chat.service";
 
 @Component({
     selector: 'app-other-profile',
@@ -18,8 +22,27 @@ export class OtherProfileComponent {
     video = '';
     editOn: boolean = true;
     videoOn: boolean = false;
-    trackName: string = ''
-    routeId = ''
+    trackName: string = '';
+    routeId = '';
+
+    sender = '';
+    receiver = '';
+    message = '';
+    messageArray: Array<{ sender: string, receiver: string, message: string }> = []
+    chatWindow: boolean = false;
+
+    join() {
+        this.chatService.joinRoom({ sender: this.sender, receiver: this.receiver })
+        this.chatWindow = true;
+    }
+    leave() {
+        this.chatService.leaveRoom({ sender: this.sender, receiver: this.receiver })
+        this.chatWindow = false;
+    }
+    send() {
+        this.chatService.sendMessage({ sender: this.sender, receiver: this.receiver, message: this.message })
+        this.message = '';
+    }
 
     constructor(
         private http: HttpClient,
@@ -28,7 +51,18 @@ export class OtherProfileComponent {
         private musicService: MusicService,
         private route: ActivatedRoute,
         private updateDataService: UpdateDataService,
-    ) { }
+        public dialog: MatDialog,
+        private chatService: ChatService
+    ) {
+        this.chatService.newUserJoined()
+            .subscribe()
+        this.chatService.userLeft()
+            .subscribe()
+        this.chatService.messageReceived()
+            .subscribe(data => {
+                this.messageArray.push(data)
+            })
+    }
 
     startVideo(video: HTMLImageElement) {
         this.video = video.id
@@ -39,7 +73,7 @@ export class OtherProfileComponent {
 
     stopVideo(videoPlayer: HTMLVideoElement) {
         // videoPlayer.pause()
-        this.video = ''
+        this.video = '';
         this.videoOn = false
         console.log(this.videoOn);
         console.log(this.video);
@@ -52,9 +86,16 @@ export class OtherProfileComponent {
     }
 
     ngOnInit() {
+        this.dataService.getProfile()
+            .subscribe(res => {
+                let str:any
+                str=res._id
+                this.sender = str
+            })
         this.route.params
             .subscribe(params => {
                 this.routeId = params['id'];
+                this.receiver = params['id'];
                 this.dataService.getUsers()
                     .subscribe({
                         next: (res) => {
@@ -102,45 +143,18 @@ export class OtherProfileComponent {
     };
 
     submitDate() {
-        console.log(this.selected)
-        this.dataService.getProfile()
-            .subscribe({
-                next: (res) => {
-                    console.log(res._id);
-                    const bookingDate = this.selected.toISOString().substring(0, 10)
-                    let other = this.otherProfile
-                    const eventBooking = {
-                        userId: res._id,
-                        artistId: other._id,
-                        bookingDate: bookingDate,
-                        price: other.eventPricing,
-                        isConfirmed: false,
-                    }
-                    other.eventBookings?.push(eventBooking)
-                    this.updateDataService.updateProfile(other)
-                        .subscribe({
-                            next: (res) => {
-                                console.log(`res:${res._id}`)
-                                this.otherProfile = res
-                                this.bookedDates = res.eventBookings?.map((item) => {
-                                    return item.bookingDate
-                                })
-                                console.log(this.bookedDates);
-                            },
-                            error: (err) => {
-                                if (err instanceof HttpErrorResponse) {
-                                    if (err.status === 401 || 500) {
-                                        console.log(`Error:${err}`)
-                                        this.router.navigate(['/user/login'])
-                                    }
-                                }
-                            }
-                        })
-                }, error: (err) => {
-
+        const dialogRef = this.dialog.open(BookingDialogComponent, {
+            data: {
+                artist: this.otherProfile.name,
+                date: this.selected.toISOString().substring(0, 10),
+                other: this.otherProfile
+            }
+        });
+        dialogRef.afterClosed()
+            .subscribe(
+                data => {
+                    console.log("Dialog output:", data)
                 }
-            })
-
+            )
     }
-
 }

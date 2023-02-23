@@ -38,7 +38,7 @@ router.post('/login', userController.userLoginPost);
 
 router.post('/adminLogin', userController.adminLoginPost);
 
-router.get('/users', middlewares.verifyToken, userController.usersGet);
+router.get('/users', userController.usersGet);
 
 // router.get('/token', middlewares.validToken);
 

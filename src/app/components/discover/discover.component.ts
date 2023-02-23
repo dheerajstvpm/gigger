@@ -99,9 +99,7 @@ export class DiscoverComponent {
                     }
                 }
             })
-
     }
-
 
     addFavourite(artist: string) {
         this.profile.favouriteArtists?.push(artist)
@@ -231,7 +229,6 @@ export class DiscoverComponent {
                     console.log(err);
                 }
             })
-
     }
 
     applyFilter(event: Event): void {

@@ -75,6 +75,9 @@ export class ProfileComponent {
                 i++
             }
         }
+        console.log(formData);
+                   
+        
         let uploadUrl = ""
         if (event.target.className === "image-input") {
             uploadUrl = "http://localhost:3000/api/imageUpload"
@@ -127,11 +130,18 @@ export class ProfileComponent {
         this.dataService.getProfile()
             .subscribe({
                 next: (res) => {
-                    console.log(res.eventBookings)
+                    console.log("out :"+res.eventBookings)
                     let bookings: any
-                    bookings = res.eventBookings
+                    bookings = res.eventBookings?.filter(item => {
+                        return !item.isConfirmed
+                    })
+                    let confirmedBooking: any
+                    confirmedBooking = res.eventBookings?.filter(item => {
+                        return item.isConfirmed
+                    })
                     this.profile = res
                     this.dataSource.data = bookings
+                    this.dataSource2.data = confirmedBooking
                 },
                 error: (err) => {
                     if (err instanceof HttpErrorResponse) {
@@ -176,10 +186,32 @@ export class ProfileComponent {
             )
     }
 
+    confirmBooking(element: any) {
+        let eventBookings: any
+        eventBookings = this.profile.eventBookings
+        for (let one of eventBookings) {
+            if (one._id === element._id) {
+                one.isConfirmed = true
+            }
+        }
+        this.profile.eventBookings = eventBookings
+        this.updateDataService.updateProfile(this.profile)
+            .subscribe({
+                next: res => {
+                    console.log(`res:${res}`);
+                    this.profile = res
+                },
+                error: err => {
+                    console.log(`err:${err}`);
+                }
+            })
+    }
+
     title = 'angular-datepicker';
 
     displayedColumns: string[] = ['_id', 'userId', 'artistId', 'payment', 'bookingDate', 'isConfirmed'];
     dataSource = new MatTableDataSource<User>();
+    dataSource2 = new MatTableDataSource<User>();
 
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -187,6 +219,8 @@ export class ProfileComponent {
     ngAfterViewInit() {
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator
+        this.dataSource2.sort = this.sort
+        this.dataSource2.paginator = this.paginator
     }
 
     applyFilter(event: Event): void {
@@ -196,5 +230,44 @@ export class ProfileComponent {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    applyFilter2(event: Event): void {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource2.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource2.paginator) {
+            this.dataSource2.paginator.firstPage();
+        }
+    }
+
+    addFavourite(artist: string) {
+        this.profile.favouriteArtists?.push(artist)
+        this.updateDataService.updateProfile(this.profile)
+            .subscribe({
+                next: (res) => {
+                    console.log(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+    }
+
+    removeFavourite(artist: string) {
+        let index: any
+        index = this.profile.favouriteArtists?.indexOf(artist);
+        if (index > -1) { // only splice array when item is found
+            this.profile.favouriteArtists?.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        this.updateDataService.updateProfile(this.profile)
+            .subscribe({
+                next: (res) => {
+                    console.log(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
     }
 }
