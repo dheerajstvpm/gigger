@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 export class ChatService {
 
-    private socket = io('http://localhost:3001')
+    private socket = io('http://127.0.0.1:3001')
     constructor() { }
 
     joinRoom(data: any) {

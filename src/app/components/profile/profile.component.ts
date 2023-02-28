@@ -80,19 +80,19 @@ export class ProfileComponent {
         
         let uploadUrl = ""
         if (event.target.className === "image-input") {
-            uploadUrl = "http://localhost:3000/api/imageUpload"
+            uploadUrl = "http://127.0.0.1:3000/api/imageUpload"
         }
         if (event.target.className === "track-input") {
-            uploadUrl = "http://localhost:3000/api/trackUpload"
+            uploadUrl = "http://127.0.0.1:3000/api/trackUpload"
         }
         if (event.target.className === "albumArt-input") {
-            uploadUrl = "http://localhost:3000/api/albumArtUpload"
+            uploadUrl = "http://127.0.0.1:3000/api/albumArtUpload"
         }
         if (event.target.className === "video-input") {
-            uploadUrl = "http://localhost:3000/api/videoUpload"
+            uploadUrl = "http://127.0.0.1:3000/api/videoUpload"
         }
         if (event.target.className === "thumbnail-input") {
-            uploadUrl = "http://localhost:3000/api/thumbnailUpload"
+            uploadUrl = "http://127.0.0.1:3000/api/thumbnailUpload"
         }
         const blob = new Blob();
         formData.append("albumArt", blob, albumId);

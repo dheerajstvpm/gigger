@@ -62,6 +62,10 @@ io.on('connection', (socket) => {
         )
     });
 });
+
+app.get('/', function (req, res) {
+    res.send('From chat.js')
+})
 server.listen(process.env.chatPORT, () => {
     console.log(`listening on :${process.env.chatPORT} for socket connection event`);
 });
