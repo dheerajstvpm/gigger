@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
     });
 });
 
-app.get('/', function (req, res) {
+app.get('/chat', function (req, res) {
     res.send('From chat.js')
 })
 server.listen(process.env.chatPORT, () => {
