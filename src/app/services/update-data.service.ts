@@ -7,7 +7,7 @@ import { User } from "../models/user";
 })
 export class UpdateDataService {
 
-  private profileUrl="http://127.0.0.1:3000/api/profile"
+  private profileUrl="http://process.env.localhost3000/api/profile"
   
   constructor(private http:HttpClient) { }
 

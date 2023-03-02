@@ -9,10 +9,10 @@ import { HttpErrorResponse } from "@angular/common/http";
     providedIn: 'root'
 })
 export class AuthService {
-    private signupUrl = "http://127.0.0.1:3000/api/signup"
-    private loginUrl = "http://127.0.0.1:3000/api/login"
-    private adminLoginUrl = "http://127.0.0.1:3000/api/adminLogin"
-    // private tokenUrl = "http://127.0.0.1:3000/api/token"
+    private signupUrl = "http://process.env.localhost3000/api/signup"
+    private loginUrl = "http://process.env.localhost3000/api/login"
+    private adminLoginUrl = "http://process.env.localhost3000/api/adminLogin"
+    // private tokenUrl = "http://process.env.localhost3000/api/token"
 
     loginStatus: boolean = false
     userType:string=''

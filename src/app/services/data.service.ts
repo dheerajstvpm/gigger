@@ -8,9 +8,9 @@ import { Favourite } from '../models/favourite';
 })
 export class DataService {
 
-  private usersUrl="http://127.0.0.1:3000/api/users"
-  private profileUrl="http://127.0.0.1:3000/api/profile"
-  private favouritesUrl="http://127.0.0.1:3000/api/favourites"
+  private usersUrl="http://process.env.localhost3000/api/users"
+  private profileUrl="http://process.env.localhost3000/api/profile"
+  private favouritesUrl="http://process.env.localhost3000/api/favourites"
   
   constructor(private http:HttpClient) { }
 
