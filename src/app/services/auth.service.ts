@@ -4,15 +4,17 @@ import { User } from "../models/user";
 import { Router } from "@angular/router";
 import { DataService } from './data.service';
 import { HttpErrorResponse } from "@angular/common/http";
+import { Environment } from '../environment';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private signupUrl = "http://process.env.localhost3000/api/signup"
-    private loginUrl = "http://process.env.localhost3000/api/login"
-    private adminLoginUrl = "http://process.env.localhost3000/api/adminLogin"
-    // private tokenUrl = "http://process.env.localhost3000/api/token"
+    private signupUrl = "http://"+Environment.localhost3000+"/api/signup"
+    private loginUrl = "http://"+Environment.localhost3000+"/api/login"
+    private adminLoginUrl = "http://"+Environment.localhost3000+"/api/adminLogin"
+    // private tokenUrl = "http://"+Environment.localhost3000+"/api/token"
 
     loginStatus: boolean = false
     userType:string=''
