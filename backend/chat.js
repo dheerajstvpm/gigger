@@ -66,6 +66,9 @@ io.on('connection', (socket) => {
 app.get('/chat', function (req, res) {
     res.send('From chat.js')
 })
+app.get('/healthCheck', function (req, res) {
+  res.send({status:'OK'})
+})
 server.listen(process.env.chatPORT, () => {
     console.log(`listening on :${process.env.chatPORT} for socket connection event`);
 });
