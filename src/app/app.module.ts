@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
@@ -72,6 +72,7 @@ import { BookingDialogComponent } from './components/booking-dialog/booking-dial
       useClass: TokenInterceptorService,
       multi: true,
     },
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent],
 })
