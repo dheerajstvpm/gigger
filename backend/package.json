@@ -1,6 +1,11 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "engines":{
+    "node": ">18.18 <=20.11",
+    "npm":"Please use pnpm",
+    "pnpm":">8.15.1"
+  },
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -24,6 +29,7 @@
     "mongoose": "^6.8.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.9",
     "nodemon": "^2.0.20",
     "socket.io": "^4.6.1",
     "twilio": "^2.5.2"
