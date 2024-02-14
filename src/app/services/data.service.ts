@@ -9,10 +9,10 @@ import { Environment } from '../environment';
 })
 export class DataService {
 
-  private usersUrl="http://"+Environment.localhost3000+"/api/users"
-  private profileUrl="http://"+Environment.localhost3000+"/api/profile"
-  private favouritesUrl="http://"+Environment.localhost3000+"/api/favourites"
-  
+  private usersUrl=Environment.backendURL+"/users"
+  private profileUrl=Environment.backendURL+"/profile"
+  private favouritesUrl=Environment.backendURL+"/favourites"
+
   constructor(private http:HttpClient) { }
 
   getUsers(){

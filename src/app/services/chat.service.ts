@@ -9,7 +9,7 @@ import { Environment } from '../environment';
 
 export class ChatService {
 
-    private socket = io('http://'+Environment.localhost3001)
+    private socket = io(Environment.chatURL)
     constructor() { }
 
     joinRoom(data: any) {

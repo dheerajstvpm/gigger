@@ -1,6 +1,11 @@
 {
   "name": "gigger",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=18.18.0 <=20.11.0",
+    "npm": "Please use pnpm",
+    "pnpm": ">=8.15.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

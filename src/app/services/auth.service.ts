@@ -11,10 +11,10 @@ import { Environment } from '../environment';
     providedIn: 'root'
 })
 export class AuthService {
-    private signupUrl = "http://"+Environment.localhost3000+"/api/signup"
-    private loginUrl = "http://"+Environment.localhost3000+"/api/login"
-    private adminLoginUrl = "http://"+Environment.localhost3000+"/api/adminLogin"
-    // private tokenUrl = "http://"+Environment.localhost3000+"/api/token"
+    private signupUrl = Environment.backendURL+"/signup"
+    private loginUrl = Environment.backendURL+"/login"
+    private adminLoginUrl = Environment.backendURL+"/adminLogin"
+    // private tokenUrl = Environment.backendURL+"/token"
 
     loginStatus: boolean = false
     userType:string=''

@@ -9,8 +9,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon server.js"
+    "serve": "nodemon app.js",
+    "serve-chat": "nodemon chat.js"
   },
   "keywords": [],
   "author": "",

@@ -8,8 +8,8 @@ import { Environment } from '../environment';
 })
 export class UpdateDataService {
 
-  private profileUrl="http://"+Environment.localhost3000+"/api/profile"
-  
+  private profileUrl=Environment.backendURL+"/profile"
+
   constructor(private http:HttpClient) { }
 
   updateProfile(user:User){

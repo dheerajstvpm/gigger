@@ -1,4 +1,4 @@
 export enum Environment {
-    localhost3000 = "localhost:3000",
-    localhost3001 = "localhost:3001"
+    backendURL = "https://gigger-backend.onrender.com/api",
+    chatURL = "https://gigger-backend.onrender.com/chat"
 }
