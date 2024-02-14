@@ -44,3 +44,6 @@ Thumbs.db
 .env
 environment.ts
 
+#Lock files
+package-lock.json
+pnpm-lock.yaml
