@@ -69,10 +69,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "gigger:build:production"
+                          "buildTarget": "gigger:build:production"
                         },
                         "development": {
-                            "browserTarget": "gigger:build:development"
+                          "buildTarget": "gigger:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "gigger:build"
+                      "buildTarget": "gigger:build"
                     }
                 },
                 "test": {
