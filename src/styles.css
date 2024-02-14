@@ -1,18 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 * {
-    font-family: Ubuntu, sans-serif !important;
-    /* Add !important to overwrite all elements */
+  font-family: Ubuntu, sans-serif !important;
+  /* Add !important to overwrite all elements */
 }
-.material-icons{
-    font-family: 'Material Icons' !important;
+.material-icons {
+  font-family: "Material Icons" !important;
 }
 
 html,
 body {
-    height: 100%;
-    background-color: #2F2F2F;
-    color: #CFCFCF;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  background-color: #2f2f2f;
+  color: #cfcfcf;
+  margin: 0;
+  padding: 0;
 }

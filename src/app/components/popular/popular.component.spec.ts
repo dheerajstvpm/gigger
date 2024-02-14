@@ -8,9 +8,8 @@ describe('PopularComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PopularComponent ]
-    })
-    .compileComponents();
+      declarations: [PopularComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PopularComponent);
     component = fixture.componentInstance;

@@ -1,49 +1,109 @@
-
 <div class="signupCardDiv" *ngIf="!displaySignupForm">
-    <mat-card class="signupCard" (click)="artistSignup()">
-        <mat-card-content class="cardContent">Artist Signup</mat-card-content>
-    </mat-card>
-    <mat-card class="signupCard" (click)="signupForm()">
-        <mat-card-content class="cardContent">User Signup</mat-card-content>
-    </mat-card>
+  <mat-card class="signupCard" (click)="artistSignup()">
+    <mat-card-content class="cardContent">Artist Signup</mat-card-content>
+  </mat-card>
+  <mat-card class="signupCard" (click)="signupForm()">
+    <mat-card-content class="cardContent">User Signup</mat-card-content>
+  </mat-card>
 </div>
 
 <div id="signupForm" *ngIf="displaySignupForm">
-    <form #userForm="ngForm">
-        <h1>Signup</h1>
-        <div class="formInput">
-            <input required [(ngModel)]="signupUserData.name" #name="ngModel" name="name" type="text" id="name"
-                placeholder="Name" matInput [disabled]="verifyOTP">
-        </div>
-        <span *ngIf="name.invalid && name.touched">Name is required</span>
-        <div class="formInput">
-            <input pattern="^\w+([\._]?\w+)?@\w+(\.\w{2,3})(\.\w{2})?$" #username="ngModel"
-                [(ngModel)]="signupUserData.username" name="username" type="text" id="username" placeholder="Email"
-                matInput [disabled]="verifyOTP">
-        </div>
-        <span *ngIf="username.invalid && username.touched">Enter a valid email id</span>
-        <div class="formInput">
-            <input pattern="(?=.*\d)(?=.*[!@#$%^&*?])(?=.*[A-Z])(?=.*[a-z])[\w\d!@#$%^&*?]{8,}"
-                [(ngModel)]="signupUserData.password" #password="ngModel" name="password" type="password" id="password"
-                placeholder="Password" matInput [disabled]="verifyOTP">
-        </div>
-        <span *ngIf="password.invalid && password.touched">Password must contain a small letter, capital letter, number,
-            special character and must have atleast 8 charaters</span>
-        <div class="formInput">
-            <input [(ngModel)]="signupUserData.confirmPassword" #confirmPassword="ngModel" name="confirmPassword"
-                type="password" id="confirmPassword" placeholder="Confirm password" matInput [disabled]="verifyOTP">
-        </div>
-        <span *ngIf="!passwordMatch()  && confirmPassword.touched">Passwords do not match</span>
-        <div class="formInput" *ngIf="verifyOTP">
-            <input pattern="[\d]{4}" [(ngModel)]="signupUserData.otp" #otp="ngModel" name="otp" type="password" id="otp"
-                placeholder="OTP" matInput>
-        </div>
-        <div>{{signupError}}</div>
-        <button (click)="signupUser()" [disabled]="userForm.invalid" *ngIf="!verifyOTP" id="signUpButton"
-            mat-raised-button>Signup</button>
-        <button (click)="signupUser()" [disabled]="userForm.invalid" *ngIf="verifyOTP" id="submitOTP"
-            mat-raised-button>Submit</button>
-    </form>
+  <form #userForm="ngForm">
+    <h1>Signup</h1>
+    <div class="formInput">
+      <input
+        required
+        [(ngModel)]="signupUserData.name"
+        #name="ngModel"
+        name="name"
+        type="text"
+        id="name"
+        placeholder="Name"
+        matInput
+        [disabled]="verifyOTP"
+      />
+    </div>
+    <span *ngIf="name.invalid && name.touched">Name is required</span>
+    <div class="formInput">
+      <input
+        pattern="^\w+([\._]?\w+)?@\w+(\.\w{2,3})(\.\w{2})?$"
+        #username="ngModel"
+        [(ngModel)]="signupUserData.username"
+        name="username"
+        type="text"
+        id="username"
+        placeholder="Email"
+        matInput
+        [disabled]="verifyOTP"
+      />
+    </div>
+    <span *ngIf="username.invalid && username.touched"
+      >Enter a valid email id</span
+    >
+    <div class="formInput">
+      <input
+        pattern="(?=.*\d)(?=.*[!@#$%^&*?])(?=.*[A-Z])(?=.*[a-z])[\w\d!@#$%^&*?]{8,}"
+        [(ngModel)]="signupUserData.password"
+        #password="ngModel"
+        name="password"
+        type="password"
+        id="password"
+        placeholder="Password"
+        matInput
+        [disabled]="verifyOTP"
+      />
+    </div>
+    <span *ngIf="password.invalid && password.touched"
+      >Password must contain a small letter, capital letter, number, special
+      character and must have atleast 8 charaters</span
+    >
+    <div class="formInput">
+      <input
+        [(ngModel)]="signupUserData.confirmPassword"
+        #confirmPassword="ngModel"
+        name="confirmPassword"
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm password"
+        matInput
+        [disabled]="verifyOTP"
+      />
+    </div>
+    <span *ngIf="!passwordMatch() && confirmPassword.touched"
+      >Passwords do not match</span
+    >
+    <div class="formInput" *ngIf="verifyOTP">
+      <input
+        pattern="[\d]{4}"
+        [(ngModel)]="signupUserData.otp"
+        #otp="ngModel"
+        name="otp"
+        type="password"
+        id="otp"
+        placeholder="OTP"
+        matInput
+      />
+    </div>
+    <div>{{ signupError }}</div>
+    <button
+      (click)="signupUser()"
+      [disabled]="userForm.invalid"
+      *ngIf="!verifyOTP"
+      id="signUpButton"
+      mat-raised-button
+    >
+      Signup
+    </button>
+    <button
+      (click)="signupUser()"
+      [disabled]="userForm.invalid"
+      *ngIf="verifyOTP"
+      id="submitOTP"
+      mat-raised-button
+    >
+      Submit
+    </button>
+  </form>
 </div>
 
 <!-- 

@@ -1,13 +1,13 @@
-.container{
-    display: flex;
-    justify-content: center;
-    width: 90%;
+.container {
+  display: flex;
+  justify-content: center;
+  width: 90%;
 }
 
-button{
-    background-color: #1f1f1f;
+button {
+  background-color: #1f1f1f;
 }
 
-#blockBtn{
-    background-color: indianred;
+#blockBtn {
+  background-color: indianred;
 }

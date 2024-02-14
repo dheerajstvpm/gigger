@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { User } from "../models/user";
+import { HttpClient } from '@angular/common/http';
+import { User } from '../models/user';
 import { Environment } from '../environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UpdateDataService {
+  private profileUrl = Environment.backendURL + '/profile';
 
-  private profileUrl=Environment.backendURL+"/profile"
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  updateProfile(user:User){
-    return this.http.post<User>(this.profileUrl,user)
+  updateProfile(user: User) {
+    return this.http.post<User>(this.profileUrl, user);
   }
 }

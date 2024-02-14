@@ -1,168 +1,168 @@
 #userRoute {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 #userHeader {
-    display: flex;
-    background-color: #1f1f1f;
-    justify-content: space-between;
-    min-height: 50px
+  display: flex;
+  background-color: #1f1f1f;
+  justify-content: space-between;
+  min-height: 50px;
 }
 
 #userRouteOutlet {
-    flex: 1;
+  flex: 1;
 }
 
 #userFooter {
-    background-color: #1f1f1f;
-    font-size: small;
-    font-weight: normal;
-    margin-bottom: 0;
-    min-height: 50px;
-    display: flex;
-    justify-content: center;
+  background-color: #1f1f1f;
+  font-size: small;
+  font-weight: normal;
+  margin-bottom: 0;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 #userHeader a {
-    text-decoration: none;
-    color: #cfcfcf;
+  text-decoration: none;
+  color: #cfcfcf;
 }
 
 #adminRoute {
-    display: flex;
+  display: flex;
 }
 
 #logo {
-    font-size: xx-large;
-    font-weight: normal;
+  font-size: xx-large;
+  font-weight: normal;
 }
 
 .logoDiv {
-    display: flex;
+  display: flex;
 }
 
 .loginDiv {
-    display: flex;
+  display: flex;
 }
 
 .loginDiv ul {
-    display: flex;
+  display: flex;
 }
 
 ul li {
-    list-style-type: none;
-    margin-right: 15px;
+  list-style-type: none;
+  margin-right: 15px;
 }
 
 .headerButton {
-    border: 2px solid #cfcfcf;
-    border-radius: 10px;
+  border: 2px solid #cfcfcf;
+  border-radius: 10px;
 }
 
 #signupButton {
-    background-color: #28A64B;
+  background-color: #28a64b;
 }
 
 #signupButton a {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 #logoutButton {
-    background-color: #e91e63;
+  background-color: #e91e63;
 }
 
 #logoutButton a {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 #adminTab {
-    padding-left: 0%;
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    height: 100vh;
-    background-color: #cfcfcf;
-    color: #1f1f1f;
-    justify-content: space-between;
-    position: fixed;
+  padding-left: 0%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 100vh;
+  background-color: #cfcfcf;
+  color: #1f1f1f;
+  justify-content: space-between;
+  position: fixed;
 }
 
 #adminTab a {
-    text-decoration: none;
-    color: #1f1f1f;
+  text-decoration: none;
+  color: #1f1f1f;
 }
 
 .dashboardDiv {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .dashboardDiv ul {
-    padding-left: 0%;
+  padding-left: 0%;
 }
 
 .dashboardDiv li {
-    padding-left: 0%;
-    margin-top: 20px;
-    font-size: large;
+  padding-left: 0%;
+  margin-top: 20px;
+  font-size: large;
 }
 
 .dashboardDiv a:hover {
-    padding-left: 0%;
-    font-size: larger;
+  padding-left: 0%;
+  font-size: larger;
 }
 
 .dashboardDiv a:focus {
-    padding-left: 0%;
-    font-size: larger;
+  padding-left: 0%;
+  font-size: larger;
 }
 
 #adminRouteOutlet {
-    display: flex;
-    flex-direction: column;
-    margin-left: 25%;
-    background-color: #efefef;
-    width: 75%;
-    height: 100%;
-    min-height: 100vh;
-    color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  margin-left: 25%;
+  background-color: #efefef;
+  width: 75%;
+  height: 100%;
+  min-height: 100vh;
+  color: #1f1f1f;
 }
 
 #adminRouteOutlet header {
-    display: flex;
-    justify-content: end;
-    margin: 50px;
-    font-size: xx-large;
+  display: flex;
+  justify-content: end;
+  margin: 50px;
+  font-size: xx-large;
 }
 
 #adminLoginRoute {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: #efefef;
-    color: #1f1f1f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #efefef;
+  color: #1f1f1f;
 }
 
 .roundButton {
-    background-color: #28A64B;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    bottom: 12px;
-    right: 20px;
-    z-index: 5;
+  background-color: #28a64b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 12px;
+  right: 20px;
+  z-index: 5;
 }
 
-.navigationDiv{
-    display: flex;
-    gap: 20px;
+.navigationDiv {
+  display: flex;
+  gap: 20px;
 }
-.navigationDiv a span{
-    font-size: medium;
+.navigationDiv a span {
+  font-size: medium;
 }

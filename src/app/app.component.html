@@ -2,46 +2,50 @@
 <title *ngIf="auth.adminRoute()">Gigger admin</title>
 
 <div *ngIf="auth.userRoute()" id="userRoute">
-    <mat-toolbar id="userHeader">
-        <div class="logoDiv">
-            <ul>
-                <li>
-                    <a routerLink="/user" id="logo"> Gigger </a>
-                </li>
-            </ul>
-        </div>
-        <div class="navigationDiv">
-            <a routerLink="/user/home" id="logo"><span> Home </span></a>
-            <a routerLink="/user/discover" id="logo"><span> Discover </span></a>
-            <a routerLink="/user/popular" id="logo"><span> Popular </span></a>
-        </div>
-        <div class="loginDiv">
-            <ul *ngIf="!auth.loggedIn()">
-                <li>
-                    <button mat-raised-button class="headerButton"><a routerLink="/user/login"
-                            routerLinkActive="active">Login</a></button>
-                </li>
-                <li>
-                    <button mat-raised-button id="signupButton" class="headerButton"><a routerLink="/user/signup"
-                            routerLinkActive="active">Signup</a></button>
-                </li>
-            </ul>
-            <ul *ngIf="auth.loggedIn()">
-                <li>
-                    <button mat-raised-button class="headerButton"><a routerLink="/user/profile"
-                            routerLinkActive="active">Profile</a></button>
-                </li>
-                <li>
-                    <button mat-raised-button id="logoutButton" class="headerButton"><a (click)="auth.logout()"
-                            routerLinkActive="active">Logout</a></button>
-                </li>
-            </ul>
-        </div>
-    </mat-toolbar>
-    <div id="userRouteOutlet">
-        <router-outlet></router-outlet>
+  <mat-toolbar id="userHeader">
+    <div class="logoDiv">
+      <ul>
+        <li>
+          <a routerLink="/user" id="logo"> Gigger </a>
+        </li>
+      </ul>
     </div>
-    <!-- <div class="footerPlayer">
+    <div class="navigationDiv">
+      <a routerLink="/user/home" id="logo"><span> Home </span></a>
+      <a routerLink="/user/discover" id="logo"><span> Discover </span></a>
+      <a routerLink="/user/popular" id="logo"><span> Popular </span></a>
+    </div>
+    <div class="loginDiv">
+      <ul *ngIf="!auth.loggedIn()">
+        <li>
+          <button mat-raised-button class="headerButton">
+            <a routerLink="/user/login" routerLinkActive="active">Login</a>
+          </button>
+        </li>
+        <li>
+          <button mat-raised-button id="signupButton" class="headerButton">
+            <a routerLink="/user/signup" routerLinkActive="active">Signup</a>
+          </button>
+        </li>
+      </ul>
+      <ul *ngIf="auth.loggedIn()">
+        <li>
+          <button mat-raised-button class="headerButton">
+            <a routerLink="/user/profile" routerLinkActive="active">Profile</a>
+          </button>
+        </li>
+        <li>
+          <button mat-raised-button id="logoutButton" class="headerButton">
+            <a (click)="auth.logout()" routerLinkActive="active">Logout</a>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar>
+  <div id="userRouteOutlet">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <div class="footerPlayer">
         <audio src="http://localhost:3000/tracks/{{track}}.mp3" id="player" autoplay></audio>
         <div class="audioPlayer">
             <button mat-raised-button onclick="document.getElementById('player').play()">
@@ -58,50 +62,81 @@
             </button>
         </div>
     </div> -->
-    <mat-toolbar id="userFooter">
-        Get bigger with gigger
-    </mat-toolbar>
-    <audio src="http://localhost:3000/tracks/{{track}}#t={{startTime}}" id="player" #player autoplay></audio>
-    <button class="roundButton" *ngIf="isPaused && track" mat-mini-fab (click)="playTrack(player)">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="play_arrow"></mat-icon>
-    </button>
-    <button class="roundButton" *ngIf="!isPaused && track" mat-mini-fab (click)="pauseTrack(player)">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="pause"></mat-icon>
-    </button>
+  <mat-toolbar id="userFooter"> Get bigger with gigger </mat-toolbar>
+  <audio
+    src="http://localhost:3000/tracks/{{ track }}#t={{ startTime }}"
+    id="player"
+    #player
+    autoplay
+  ></audio>
+  <button
+    class="roundButton"
+    *ngIf="isPaused && track"
+    mat-mini-fab
+    (click)="playTrack(player)"
+  >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="play_arrow"
+    ></mat-icon>
+  </button>
+  <button
+    class="roundButton"
+    *ngIf="!isPaused && track"
+    mat-mini-fab
+    (click)="pauseTrack(player)"
+  >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="pause"
+    ></mat-icon>
+  </button>
 </div>
 
 <div *ngIf="auth.adminRoute()" id="adminRoute">
-    <mat-toolbar id="adminTab">
-        <div class="dashboardDiv">
-            <ul>
-                <li>
-                    <a routerLink="/admin/dashboard" routerLinkActive="active">Admin dashboard</a>
-                </li>
-                <li>
-                    <a routerLink="/admin/artistDetails" routerLinkActive="active">Artist details</a>
-                </li>
-                <li>
-                    <a routerLink="/admin/userDetails" routerLinkActive="active">User details</a>
-                </li>
-                <li>
-                    <a routerLink="/admin/bookingDetails" routerLinkActive="active">Booking details</a>
-                </li>
-                <li>
-                    <a routerLink="/admin/paymentDetails" routerLinkActive="active">Payment details</a>
-                </li>
-                <li>
-                    <a (click)="auth.adminLogout()" routerLinkActive="active">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </mat-toolbar>
-    <div id="adminRouteOutlet">
-        <header>Gigger admin</header>
-        <router-outlet></router-outlet>
+  <mat-toolbar id="adminTab">
+    <div class="dashboardDiv">
+      <ul>
+        <li>
+          <a routerLink="/admin/dashboard" routerLinkActive="active"
+            >Admin dashboard</a
+          >
+        </li>
+        <li>
+          <a routerLink="/admin/artistDetails" routerLinkActive="active"
+            >Artist details</a
+          >
+        </li>
+        <li>
+          <a routerLink="/admin/userDetails" routerLinkActive="active"
+            >User details</a
+          >
+        </li>
+        <li>
+          <a routerLink="/admin/bookingDetails" routerLinkActive="active"
+            >Booking details</a
+          >
+        </li>
+        <li>
+          <a routerLink="/admin/paymentDetails" routerLinkActive="active"
+            >Payment details</a
+          >
+        </li>
+        <li>
+          <a (click)="auth.adminLogout()" routerLinkActive="active">Logout</a>
+        </li>
+      </ul>
     </div>
+  </mat-toolbar>
+  <div id="adminRouteOutlet">
+    <header>Gigger admin</header>
+    <router-outlet></router-outlet>
+  </div>
 </div>
 <div *ngIf="auth.adminLoginRoute()" id="adminRoute">
-    <div id="adminLoginRoute">
-        <router-outlet></router-outlet>
-    </div>
+  <div id="adminLoginRoute">
+    <router-outlet></router-outlet>
+  </div>
 </div>

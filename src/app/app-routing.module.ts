@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard } from './auth.guard';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { ArtistDetailsComponent } from './adminComponents/artist-details/artist-details.component';
 import { UserDetailsComponent } from './adminComponents/user-details/user-details.component';
@@ -18,78 +18,77 @@ import { OtherProfileComponent } from './components/other-profile/other-profile.
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "/user/home",
-    pathMatch: "full"
+    path: '',
+    redirectTo: '/user/home',
+    pathMatch: 'full',
   },
   {
-    path: "user/signup",
-    component: SignupComponent
+    path: 'user/signup',
+    component: SignupComponent,
   },
   {
-    path: "user/login",
-    component: LoginComponent
+    path: 'user/login',
+    component: LoginComponent,
   },
   {
-    path: "user/home",
-    component: HomeComponent
+    path: 'user/home',
+    component: HomeComponent,
   },
   {
-    path: "user/discover",
-    component: DiscoverComponent
+    path: 'user/discover',
+    component: DiscoverComponent,
   },
   {
-    path: "user/popular",
-    component: PopularComponent
+    path: 'user/popular',
+    component: PopularComponent,
   },
   {
-    path: "user/otherProfile/:id",
-    component: OtherProfileComponent
+    path: 'user/otherProfile/:id',
+    component: OtherProfileComponent,
   },
   {
-    path: "user/profile",
+    path: 'user/profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: "admin",
-    redirectTo: "/loginAdmin",
-    pathMatch: "full"
+    path: 'admin',
+    redirectTo: '/loginAdmin',
+    pathMatch: 'full',
   },
   {
-    path: "loginAdmin",
-    component: AdminLoginComponent
+    path: 'loginAdmin',
+    component: AdminLoginComponent,
   },
   {
-    path: "admin/dashboard",
+    path: 'admin/dashboard',
     component: DashboardComponent,
-    canActivate: [AdminAuthGuard]
+    canActivate: [AdminAuthGuard],
   },
   {
-    path: "admin/artistDetails",
+    path: 'admin/artistDetails',
     component: ArtistDetailsComponent,
-    canActivate: [AdminAuthGuard]
+    canActivate: [AdminAuthGuard],
   },
   {
-    path: "admin/userDetails",
+    path: 'admin/userDetails',
     component: UserDetailsComponent,
-    canActivate: [AdminAuthGuard]
+    canActivate: [AdminAuthGuard],
   },
   {
-    path: "admin/bookingDetails",
+    path: 'admin/bookingDetails',
     component: BookingDetailsComponent,
-    canActivate: [AdminAuthGuard]
+    canActivate: [AdminAuthGuard],
   },
   {
-    path: "admin/paymentDetails",
+    path: 'admin/paymentDetails',
     component: PaymentDetailsComponent,
-    canActivate: [AdminAuthGuard]
+    canActivate: [AdminAuthGuard],
   },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

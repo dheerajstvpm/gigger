@@ -1,16 +1,29 @@
 <div id="loginForm">
-    <form>
-        <h1>Login</h1>
-        <div class="formInput">
-            <input [(ngModel)]="loginUserData.username" name="username" type="text" id="username" placeholder="Username"
-                matInput>
-        </div>
-        <div class="formInput">
-            <input [(ngModel)]="loginUserData.password" name="password" type="password" id="password"
-                placeholder="Password" matInput>
-        </div>
-        <div>{{loginError}}</div>
-        <button (click)="adminLogin()" id="loginButton" mat-raised-button>Login</button>
-        
-    </form>
+  <form>
+    <h1>Login</h1>
+    <div class="formInput">
+      <input
+        [(ngModel)]="loginUserData.username"
+        name="username"
+        type="text"
+        id="username"
+        placeholder="Username"
+        matInput
+      />
+    </div>
+    <div class="formInput">
+      <input
+        [(ngModel)]="loginUserData.password"
+        name="password"
+        type="password"
+        id="password"
+        placeholder="Password"
+        matInput
+      />
+    </div>
+    <div>{{ loginError }}</div>
+    <button (click)="adminLogin()" id="loginButton" mat-raised-button>
+      Login
+    </button>
+  </form>
 </div>
