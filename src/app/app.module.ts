@@ -53,7 +53,7 @@ import { BookingDialogComponent } from './components/booking-dialog/booking-dial
     UserFromIdPipe,
     BookingDialogComponent
   ],
-  entryComponents:[DialogComponent],
+  // entryComponents:[DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
