@@ -33,6 +33,9 @@ app.use('/api', api)
 app.get('/app', function (req, res) {
     res.send('From app.js')
 })
+app.get('/healthCheck', function (req, res) {
+  res.send({status:'OK'})
+})
 
 app.listen(process.env.PORT, function () {
     console.log('Server running on localhost : ' + process.env.PORT)
