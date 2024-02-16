@@ -1,0 +1,16 @@
+{
+  "routes": [
+    "/admin/artistDetails",
+    "/admin/bookingDetails",
+    "/admin/dashboard",
+    "/admin/paymentDetails",
+    "/admin/userDetails",
+    "/loginAdmin",
+    "/user/discover",
+    "/user/home",
+    "/user/login",
+    "/user/popular",
+    "/user/profile",
+    "/user/signup"
+  ]
+}
