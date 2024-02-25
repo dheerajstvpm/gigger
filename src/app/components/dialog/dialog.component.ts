@@ -7,6 +7,7 @@ import {
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { User } from '../../models/user';
 import { DataService } from '../../services/data.service';
+import { Environment } from 'src/app/environment';
 
 @Component({
   selector: 'app-dialog',
@@ -14,6 +15,8 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./dialog.component.css'],
 })
 export class DialogComponent {
+  public environment = Environment;
+
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA)
@@ -33,9 +36,9 @@ export class DialogComponent {
     console.log(this.data.item);
     console.log(this.data.item.thumbnail);
     if (this.data.videoFlag) {
-      this.deleteUrl = 'http://localhost:3000/api/videoDelete';
+      this.deleteUrl = `${this.environment.staticURL}/api/videoDelete`;
     } else {
-      this.deleteUrl = 'http://localhost:3000/api/trackDelete';
+      this.deleteUrl = `${this.environment.staticURL}/api/trackDelete`;
     }
 
     const deleteItem$ = this.http.post(this.deleteUrl, this.data.item);

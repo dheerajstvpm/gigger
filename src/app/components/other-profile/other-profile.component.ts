@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { BookingDialogComponent } from '../booking-dialog/booking-dialog.component';
 import { ChatService } from '../../services/chat.service';
+import { Environment } from 'src/app/environment';
 
 @Component({
   selector: 'app-other-profile',
@@ -16,6 +17,8 @@ import { ChatService } from '../../services/chat.service';
   styleUrls: ['./other-profile.component.css'],
 })
 export class OtherProfileComponent {
+  public environment = Environment;
+
   otherProfile!: User;
   fileName = '';
   track = '';

@@ -46,7 +46,7 @@
     <router-outlet></router-outlet>
   </div>
   <!-- <div class="footerPlayer">
-        <audio src="http://localhost:3000/tracks/{{track}}.mp3" id="player" autoplay></audio>
+        <audio src="{{environment.staticURL}}/tracks/{{track}}.mp3" id="player" autoplay></audio>
         <div class="audioPlayer">
             <button mat-raised-button onclick="document.getElementById('player').play()">
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="play_arrow"></mat-icon>
@@ -64,7 +64,7 @@
     </div> -->
   <mat-toolbar id="userFooter"> Get bigger with gigger </mat-toolbar>
   <audio
-    src="http://localhost:3000/tracks/{{ track }}#t={{ startTime }}"
+    src="{{environment.staticURL}}/tracks/{{ track }}#t={{ startTime }}"
     id="player"
     #player
     autoplay

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { DataService } from '../../services/data.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { MusicService } from 'src/app/services/music.service';
+import { Environment } from 'src/app/environment';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { MusicService } from 'src/app/services/music.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+
+  public environment = Environment;
   profile!: User[];
   trackList!: {
     _id: '';

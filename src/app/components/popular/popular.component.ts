@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MusicService } from 'src/app/services/music.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Environment } from 'src/app/environment';
 
 @Component({
   selector: 'app-popular',
@@ -18,6 +19,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PopularComponent {
   profile!: User;
+  public environment = Environment;
 
   constructor(
     private http: HttpClient,

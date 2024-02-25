@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { MusicService } from './services/music.service';
+import { Environment } from './environment';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { MusicService } from './services/music.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  public environment = Environment;
   constructor(
     public auth: AuthService,
     public service: MusicService,

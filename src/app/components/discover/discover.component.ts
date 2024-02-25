@@ -8,6 +8,7 @@ import { DataService } from '../../services/data.service';
 import { UpdateDataService } from '../../services/update-data.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Environment } from 'src/app/environment';
 
 @Component({
   selector: 'app-discover',
@@ -16,6 +17,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DiscoverComponent {
   profile!: User;
+  public environment = Environment;
+
 
   constructor(
     private dataService: DataService,

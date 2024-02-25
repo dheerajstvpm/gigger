@@ -11,6 +11,7 @@ import { MusicService } from 'src/app/services/music.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Environment } from 'src/app/environment';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
+  public environment = Environment;
+
   profile!: User;
   fileName = '';
   track = '';
