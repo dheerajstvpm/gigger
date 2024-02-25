@@ -12,7 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { AuthService } from './services/auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { DashboardComponent } from './adminComponents/dashboard/dashboard.component';
 import { ArtistDetailsComponent } from './adminComponents/artist-details/artist-details.component';
