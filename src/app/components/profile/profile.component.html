@@ -34,24 +34,28 @@
           <div *ngIf="!editOn" class="imgA1" (click)="imageUpload.click()">
             <img
               *ngIf="profile.profileImage"
-              src="{{environment.staticURL}}/images/{{ profile.profileImage }}"
+              src="{{ environment.staticURL }}/images/{{
+                profile.profileImage
+              }}"
               alt="profile"
             />
             <img
               *ngIf="!profile.profileImage"
-              src="{{environment.staticURL}}/images/stockProfileImage.jpg"
+              src="{{ environment.staticURL }}/images/stockProfileImage.jpg"
               alt="profile placeholder"
             />
           </div>
           <div *ngIf="editOn" class="imgA2">
             <img
               *ngIf="profile.profileImage"
-              src="{{environment.staticURL}}/images/{{ profile.profileImage }}"
+              src="{{ environment.staticURL }}/images/{{
+                profile.profileImage
+              }}"
               alt="profile"
             />
             <img
               *ngIf="!profile.profileImage"
-              src="{{environment.staticURL}}/images/stockProfileImage.jpg"
+              src="{{ environment.staticURL }}/images/stockProfileImage.jpg"
               alt="profile placeholder"
             />
           </div>
@@ -99,14 +103,14 @@
           </button>
           <img
             *ngIf="item.albumArt && editOn"
-            src="{{environment.staticURL}}/albumArt/{{ item.albumArt }}"
+            src="{{ environment.staticURL }}/albumArt/{{ item.albumArt }}"
             id="{{ item.name }}"
             #track
             (click)="changeTrack(track)"
           />
           <img
             *ngIf="item.albumArt && !editOn"
-            src="{{environment.staticURL}}/albumArt/{{ item.albumArt }}"
+            src="{{ environment.staticURL }}/albumArt/{{ item.albumArt }}"
             id="{{ item.name }}"
             #track
             (click)="albumArtUpload.click()"
@@ -121,14 +125,14 @@
           />
           <img
             *ngIf="!item.albumArt && editOn"
-            src="{{environment.staticURL}}/albumArt/stockAlbumArt.png"
+            src="{{ environment.staticURL }}/albumArt/stockAlbumArt.png"
             id="{{ item.name }}"
             #track
             (click)="changeTrack(track)"
           />
           <img
             *ngIf="!item.albumArt && !editOn"
-            src="{{environment.staticURL}}/albumArt/stockAlbumArt.png"
+            src="{{ environment.staticURL }}/albumArt/stockAlbumArt.png"
             id="{{ item.name }}"
             (click)="albumArtUpload.click()"
           />
@@ -165,7 +169,7 @@
           <img
             *ngIf="item.thumbnail && editOn"
             onclick="document.getElementById('player').pause()"
-            src="{{environment.staticURL}}/thumbnail/{{ item.thumbnail }}"
+            src="{{ environment.staticURL }}/thumbnail/{{ item.thumbnail }}"
             id="{{ item.name }}"
             #video
             (click)="startVideo(video)"
@@ -174,7 +178,7 @@
           <img
             *ngIf="item.thumbnail && !editOn"
             onclick="document.getElementById('player').pause()"
-            src="{{environment.staticURL}}/thumbnail/{{ item.thumbnail }}"
+            src="{{ environment.staticURL }}/thumbnail/{{ item.thumbnail }}"
             id="{{ item.name }}"
             #video
             (click)="thumbnailUpload.click()"
@@ -190,7 +194,7 @@
           />
           <img
             *ngIf="!item.thumbnail && editOn"
-            src="{{environment.staticURL}}/thumbnail/stockThumbnail.jpeg"
+            src="{{ environment.staticURL }}/thumbnail/stockThumbnail.jpeg"
             id="{{ item.name }}"
             #video
             (click)="startVideo(video)"
@@ -198,7 +202,7 @@
           />
           <img
             *ngIf="!item.thumbnail && !editOn"
-            src="{{environment.staticURL}}/thumbnail/stockThumbnail.jpeg"
+            src="{{ environment.staticURL }}/thumbnail/stockThumbnail.jpeg"
             id="{{ item.name }}"
             (click)="thumbnailUpload.click()"
             class="thumbnail"
@@ -213,7 +217,7 @@
               #videoPlayer
             >
               <source
-                src="{{environment.staticURL}}/videos/{{ video }}"
+                src="{{ environment.staticURL }}/videos/{{ video }}"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -253,12 +257,14 @@
                   <a routerLink="../../user/otherProfile/{{ item }}">
                     <img
                       *ngIf="item"
-                      src="{{environment.staticURL}}/images/{{ item }}.jpg"
+                      src="{{ environment.staticURL }}/images/{{ item }}.jpg"
                       alt="artist"
                     />
                     <img
                       *ngIf="!item"
-                      src="{{environment.staticURL}}/images/stockProfileImage.jpg"
+                      src="{{
+                        environment.staticURL
+                      }}/images/stockProfileImage.jpg"
                       alt="artist"
                     />
                   </a>
@@ -275,14 +281,14 @@
                   </button>
                   <img
                     *ngIf="item"
-                    src="{{environment.staticURL}}/albumArt/{{ item }}.jpg"
+                    src="{{ environment.staticURL }}/albumArt/{{ item }}.jpg"
                     id="{{ item }}"
                     #first
                     (click)="changeTrack(first)"
                   />
                   <img
                     *ngIf="!item"
-                    src="{{environment.staticURL}}/albumArt/stockAlbumArt.png"
+                    src="{{ environment.staticURL }}/albumArt/stockAlbumArt.png"
                     id="{{ item }}"
                     #first
                     (click)="changeTrack(first)"

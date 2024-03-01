@@ -11,12 +11,14 @@
           <div class="imgA1">
             <img
               *ngIf="otherProfile.profileImage"
-              src="{{environment.staticURL}}/images/{{ otherProfile.profileImage }}"
+              src="{{ environment.staticURL }}/images/{{
+                otherProfile.profileImage
+              }}"
               alt="profile"
             />
             <img
               *ngIf="!otherProfile.profileImage"
-              src="{{environment.staticURL}}/images/stockProfileImage.jpg"
+              src="{{ environment.staticURL }}/images/stockProfileImage.jpg"
               alt="profile placeholder"
             />
           </div>
@@ -50,14 +52,14 @@
         <div class="itemDiv" *ngFor="let item of otherProfile.tracks">
           <img
             *ngIf="item.albumArt"
-            src="{{environment.staticURL}}/albumArt/{{ item.albumArt }}"
+            src="{{ environment.staticURL }}/albumArt/{{ item.albumArt }}"
             id="{{ item.name }}"
             #track
             (click)="changeTrack(track)"
           />
           <img
             *ngIf="!item.albumArt"
-            src="{{environment.staticURL}}/albumArt/stockAlbumArt.png"
+            src="{{ environment.staticURL }}/albumArt/stockAlbumArt.png"
             id="{{ item.name }}"
             #track
             (click)="changeTrack(track)"
@@ -73,7 +75,7 @@
           <img
             *ngIf="item.thumbnail"
             onclick="document.getElementById('player').pause()"
-            src="{{environment.staticURL}}/thumbnail/{{ item.thumbnail }}"
+            src="{{ environment.staticURL }}/thumbnail/{{ item.thumbnail }}"
             id="{{ item.name }}"
             #video
             (click)="startVideo(video)"
@@ -81,7 +83,7 @@
           />
           <img
             *ngIf="!item.thumbnail"
-            src="{{environment.staticURL}}/thumbnail/stockThumbnail.jpeg"
+            src="{{ environment.staticURL }}/thumbnail/stockThumbnail.jpeg"
             id="{{ item.name }}"
             #video
             (click)="startVideo(video)"
@@ -97,7 +99,7 @@
               #videoPlayer
             >
               <source
-                src="{{environment.staticURL}}/videos/{{ video }}"
+                src="{{ environment.staticURL }}/videos/{{ video }}"
                 type="video/mp4"
               />
               Your browser does not support the video tag.

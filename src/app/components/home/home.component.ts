@@ -12,7 +12,6 @@ import { Environment } from 'src/app/environment';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-
   public environment = Environment;
   profile!: User[];
   trackList!: {

@@ -19,7 +19,6 @@ export class DiscoverComponent {
   profile!: User;
   public environment = Environment;
 
-
   constructor(
     private dataService: DataService,
     private updateDataService: UpdateDataService,
