@@ -35,11 +35,11 @@
           <a routerLink="../../user/otherProfile/{{ element._id }}">
             <img
               *ngIf="element.image"
-              src="{{environment.staticURL}}/images/{{ element.image }}"
+              src="{{ environment.staticURL }}/images/{{ element.image }}"
             />
             <img
               *ngIf="!element.image"
-              src="{{environment.staticURL}}/images/stockProfileImage.jpg"
+              src="{{ environment.staticURL }}/images/stockProfileImage.jpg"
             />
           </a>
         </td>
